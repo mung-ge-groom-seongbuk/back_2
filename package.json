@@ -1,0 +1,25 @@
+{
+  "name": "gooroomton",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0",
+    "http-status-codes": "^2.3.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mung-ge-groom-seongbuk/back_2.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/mung-ge-groom-seongbuk/back_2/issues"
+  },
+  "homepage": "https://github.com/mung-ge-groom-seongbuk/back_2#readme",
+  "description": ""
+}
