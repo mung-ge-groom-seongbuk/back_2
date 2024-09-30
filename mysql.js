@@ -1,4 +1,4 @@
-require('dotenv').config({path: "/path/to/.env.local"}); // 환경 변수 불러오기
+require('dotenv').config({path:'./.env'}); // 환경 변수 불러오기
 const mysql = require('mysql2/promise');
 
 let test = async () => {

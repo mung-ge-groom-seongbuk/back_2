@@ -1,4 +1,4 @@
-require('dotenv').config({path: "/path/to/.env.local"}); // dotenv 패키지 로드
+require('dotenv').config({path:'./.env'}); // dotenv 패키지 로드
 
 const { Sequelize } = require('sequelize');
 
