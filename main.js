@@ -1,34 +1,27 @@
-const express = require('express');
+require('dotenv').config(); // dotenv 패키지 로드
+
 const { Sequelize } = require('sequelize');
-const UserModel = require('./models/user'); // 경로를 실제 파일 위치에 맞게 조정해
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+// 환경 변수 출력
+console.log('DB_NAME:', process.env.DB_NAME);
+console.log('DB_USER:', process.env.DB_USER);
+console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
+console.log('DB_HOST:', process.env.DB_HOST);
+console.log('DB_PORT:', process.env.DB_PORT);
 
-// Sequelize 데이터베이스 연결 설정
-const sequelize = new Sequelize('gooroom_db', 'cc', 'password', {
-    host: 'localhost',
-    dialect: 'mysql'
+// Sequelize 인스턴스 생성
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    dialect: 'mysql',
+    logging: console.log // 쿼리 로그 출력
 });
 
-// User 모델 초기화
-const User = UserModel(sequelize);
+// 데이터베이스 연결 확인
+sequelize.authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    });
 
-// 데이터베이스 연결 및 테이블 생성
-const initializeDatabase = async () => {
-    try {
-        await sequelize.authenticate(); // 데이터베이스 연결 확인
-        console.log('Database connection has been established successfully.');
-
-        await sequelize.sync({ force: true }); // 테이블 생성 (기존 테이블을 삭제하고 새로 생성)
-        console.log('User table has been created successfully.');
-    } catch (error) {
-        console.error('Unable to connect to the database:', error);
-    }
-};
-
-// 서버 시작
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-    initializeDatabase(); // 데이터베이스 초기화
-});
