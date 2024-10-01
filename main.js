@@ -1,40 +1,36 @@
 require('dotenv').config({ path: './.env' }); // dotenv 패키지 로드
+const express = require('express');
+const db = require('./models'); // models/index.js에서 db 객체 가져오기
 
-const { Sequelize } = require('sequelize');
-const UserModel = require('./models/user'); // User 모델 파일 경로
-const MatchingModel = require('./models/matching');
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-// 환경 변수 출력
+// 환경 변수 출력 (필요 없으면 삭제 가능)
 console.log('DB_NAME:', process.env.DB_NAME);
 console.log('DB_USER:', process.env.DB_USER);
 console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
 console.log('DB_HOST:', process.env.DB_HOST);
 console.log('DB_PORT:', process.env.DB_PORT);
 
-// Sequelize 인스턴스 생성
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT, // 포트 추가
-    dialect: 'mysql',
-    logging: console.log // 쿼리 로그 출력
+// 데이터베이스 연결 및 테이블 동기화
+db.sequelize.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+    return db.sequelize.sync({ alter: true }); // alter 옵션으로 스키마 변경 적용
+  })
+  .then(() => {
+    console.log('Database synchronized.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
+// 기본 라우트
+app.get('/', (req, res) => res.send('Hello World!'));
+
+// 서버 실행
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
-const User = UserModel(sequelize);
-const Matching = MatchingModel(sequelize);
-
-// 데이터베이스 연결 및 테이블 생성
-const test = async () => {
-    try {
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
-
-        // 테이블 생성
-        await sequelize.sync(); // 모든 모델을 데이터베이스에 동기화
-        console.log('User table has been created (if it did not exist).');
-    } catch (error) {
-        console.error('Unable to connect to the database:', error);
-    }
-};
-
-test();
 
