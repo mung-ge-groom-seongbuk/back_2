@@ -16,7 +16,7 @@ console.log('DB_PORT:', process.env.DB_PORT);
 db.sequelize.authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
-    return db.sequelize.sync({ alter: true }); // alter 옵션으로 스키마 변경 적용
+    return db.sequelize.sync(); // alter 옵션 제거
   })
   .then(() => {
     console.log('Database synchronized.');
@@ -32,5 +32,6 @@ app.get('/', (req, res) => res.send('Hello World!'));
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
 
 
