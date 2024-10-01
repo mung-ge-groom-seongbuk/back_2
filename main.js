@@ -4,6 +4,11 @@ const { Sequelize } = require('sequelize');
 const UserModel = require('./models/user'); // User 모델 파일 경로
 const MatchingModel = require('./models/matching');
 const RunningDataModel = require('./models/runningData');
+const DailyDataModel = require('./models/dailyData');
+const GoalModel = require('./models/goal');
+const ChatModel = require('./models/chat');
+const NotificationModel = require('./models/notification');
+const UserLocationModel = require('./models/userLocation');
 
 // 환경 변수 출력
 console.log('DB_NAME:', process.env.DB_NAME);
@@ -23,6 +28,12 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 const User = UserModel(sequelize);
 const Matching = MatchingModel(sequelize);
 const RunningData = RunningDataModel(sequelize);
+const DailyData = DailyDataModel(sequelize);
+const Goal = GoalModel(sequelize);
+const Chat = ChatModel(sequelize);
+const Notification = NotificationModel(sequelize);
+const UserLocation = UserLocationModel(sequelize);
+
 
 // 데이터베이스 연결 및 테이블 생성
 const test = async () => {
