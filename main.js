@@ -2,6 +2,7 @@ require('dotenv').config({ path: './.env' }); // dotenv 패키지 로드
 
 const { Sequelize } = require('sequelize');
 const UserModel = require('./models/user'); // User 모델 파일 경로
+const MatchingModel = require('./models/matching');
 
 // 환경 변수 출력
 console.log('DB_NAME:', process.env.DB_NAME);
@@ -19,6 +20,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 });
 
 const User = UserModel(sequelize);
+const Matching = MatchingModel(sequelize);
 
 // 데이터베이스 연결 및 테이블 생성
 const test = async () => {
