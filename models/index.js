@@ -5,18 +5,16 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
-// 데이터베이스 연결을 위한 sequelize 인스턴스 생성
-let sequelize = new Sequelize(config.database, config.username, config.password, config);
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+// 환경 변수에서 데이터베이스 정보 가져오기
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  dialect: 'mysql'
+});
 
+// 모델 파일 읽기 및 등록
 fs
   .readdirSync(__dirname)
   .filter(file => {
@@ -32,6 +30,7 @@ fs
     db[model.name] = model;
   });
 
+// 모델 간의 관계 정의 (Associations)
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
@@ -42,5 +41,6 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
 
 
