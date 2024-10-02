@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
         },
         nickname: {
             type: DataTypes.STRING(50),
-            allowNull: false
+            allowNull: true //NULL 허용
         },
         profile_picture: {
             type: DataTypes.STRING(255),
