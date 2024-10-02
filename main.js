@@ -16,6 +16,9 @@ app.use(bodyParser.json());
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
 app.use(flash());
 
+
+
+
 // 기본 경로에 대한 라우트 추가
 app.get('/', (req, res) => {
     res.send('Hello, World!');
