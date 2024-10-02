@@ -68,7 +68,7 @@ test();
 app.post('/signup', signInController.signUp); // 회원가입 라우트 등록
 // 로그인 라우트
 app.post('/login', authenticate, redirectView); // 로그인 라우트 등록
-app.post('/logout', logout); // 로그아웃 라우트 등록
+app.post('/logout', loginoutController.logout); // 로그아웃 라우트 등록
 
 // 대시보드 라우트 (예시)
 app.get('/dashboard', (req, res) => {
