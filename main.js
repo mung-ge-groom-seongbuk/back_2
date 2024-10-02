@@ -1,6 +1,14 @@
 require('dotenv').config({ path: './.env' }); // dotenv 패키지 로드
 
+const express = require('express');
 const { Sequelize } = require('sequelize');
+
+// Express 앱 생성
+const app = express();
+
+// 포트 설정
+app.set('port', process.env.PORT || 3000);
+
 const UserModel = require('./models/user'); // User 모델 파일 경로
 const MatchingModel = require('./models/matching');
 const RunningDataModel = require('./models/runningData');
@@ -34,7 +42,6 @@ const Chat = ChatModel(sequelize);
 const Notification = NotificationModel(sequelize);
 const UserLocation = UserLocationModel(sequelize);
 
-
 // 데이터베이스 연결 및 테이블 생성
 const test = async () => {
     try {
@@ -43,7 +50,7 @@ const test = async () => {
 
         // 테이블 생성
         await sequelize.sync(); // 모든 모델을 데이터베이스에 동기화
-        console.log('User table has been created (if it did not exist).');
+        console.log('Tables have been created (if they did not exist).');
     } catch (error) {
         console.error('Unable to connect to the database:', error);
     }
@@ -51,11 +58,11 @@ const test = async () => {
 
 test();
 
-app.set('port', process.env.PORT || 80);
-
-app.listen(app.get("port"), () => {
-    console.log(`Server running on port: ${app.get("port")}`);
+// 서버 실행
+app.listen(app.get('port'), () => {
+    console.log(`Server running on port: ${app.get('port')}`);
 });
+
 
 
 
