@@ -18,6 +18,11 @@ const app = express();
 // 미들웨어 설정
 app.use(bodyParser.json()); // JSON 요청 파싱
 
+// 기본 경로에 대한 라우트 추가
+app.get('/', (req, res) => {
+    res.send('Hello, World!'); // 기본 응답
+});
+
 // 환경 변수 출력
 console.log('DB_NAME:', process.env.DB_NAME);
 console.log('DB_USER:', process.env.DB_USER);
