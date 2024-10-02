@@ -12,6 +12,8 @@ const ChatModel = require('./models/chat');
 const NotificationModel = require('./models/notification');
 const UserLocationModel = require('./models/userLocation');
 const signInController = require('./controllers/signinControllers'); // 회원가입 컨트롤러 가져오기
+const { authenticate, redirectView, logout } = require('./controllers/loginoutController'); // 로그인/로그아웃 컨트롤러 가져오기
+
 
 const app = express();
 
@@ -66,6 +68,9 @@ test();
 
 // 회원가입 라우트 등록
 app.post('/signup', signInController.signUp); // 회원가입 라우트 등록
+// 로그인 라우트
+app.post('/login', authenticate, redirectView); // 로그인 라우트 등록
+app.post('/logout', logout); // 로그아웃 라우트 등록
 
 // 서버 시작
 app.listen(80, () => {
