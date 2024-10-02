@@ -1,6 +1,7 @@
 //회원가입
 
 const { User } = require('../models'); // User 모델 불러오기
+const config = require('../config/config');
 
 // 회원가입 컨트롤러
 const signUp = async (req, res) => {
