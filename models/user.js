@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-    const User = sequelize.define("user", { // 엔티티 생성
+    const User = sequelize.define("User", { // 엔티티 생성
         user_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
