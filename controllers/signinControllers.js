@@ -1,6 +1,7 @@
-//회원가입
+// 회원가입
 
 const { User } = require('../models'); // User 모델 불러오기
+const bcrypt = require('bcrypt'); // bcrypt 모듈 불러오기
 const config = require('../config/config');
 
 // 회원가입 컨트롤러
@@ -14,12 +15,15 @@ const signUp = async (req, res) => {
             return res.status(400).json({ message: '이미 사용 중인 이메일입니다.' });
         }
 
+        // 비밀번호 해시 생성
+        const hashedPassword = await bcrypt.hash(password, 10); // saltRounds = 10
+
         // 새 사용자 생성
         const newUser = await User.create({
             name,
             email,
             phone_number,
-            password // 비밀번호 해시는 추후 적용 가능
+            password: hashedPassword // 해시된 비밀번호 저장
         });
 
         return res.status(201).json({ message: '회원가입이 완료되었습니다.', user: newUser });
@@ -30,3 +34,4 @@ const signUp = async (req, res) => {
 };
 
 module.exports = { signUp };
+
