@@ -53,7 +53,7 @@ const test = async () => {
 test();
 
 // 포트 설정 (80번 포트)
-app.set('port', 80);
+app.set('port', 3000);
 
 // 기본 경로에 대한 응답 설정
 app.get('/', (req, res) => {
