@@ -14,9 +14,9 @@ const ChatModel = require('./models/chat');
 const NotificationModel = require('./models/notification');
 const UserLocationModel = require('./models/userLocation');
 const signInController = require('./controllers/signinControllers'); // 회원가입 컨트롤러 가져오기
-const loginoutController = require('./controllers/loginoutController');
+const loginoutController = require('./controllers/loginoutControllers');
 
-const { authenticate, redirectView, logout } = require('./controllers/loginoutController'); // 로그인/로그아웃 컨트롤러 가져오기
+const { authenticate, redirectView, logout } = require('./controllers/loginoutControllers'); // 로그인/로그아웃 컨트롤러 가져오기
 
 const app = express();
 
