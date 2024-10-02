@@ -15,6 +15,7 @@ const NotificationModel = require('./models/notification');
 const UserLocationModel = require('./models/userLocation');
 const signInController = require('./controllers/signinControllers'); // 회원가입 컨트롤러 가져오기
 const loginoutController = require('./controllers/loginoutControllers');
+const nicknameController = require('./controllers/nicknameControllers');
 
 const { authenticate, redirectView, logout } = require('./controllers/loginoutControllers'); // 로그인/로그아웃 컨트롤러 가져오기
 
@@ -69,6 +70,7 @@ app.post('/signup', signInController.signUp); // 회원가입 라우트 등록
 // 로그인 라우트
 app.post('/login', authenticate, redirectView); // 로그인 라우트 등록
 app.post('/logout', loginoutController.logout); // 로그아웃 라우트 등록
+app.post('/updateProfile', nicknameController.updateProfile); // 프로필 업데이트 라우트
 
 // 대시보드 라우트 (예시)
 app.get('/dashboard', (req, res) => {

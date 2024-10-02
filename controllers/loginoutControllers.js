@@ -14,7 +14,7 @@ exports.authenticate = async (req, res, next) => {
         if (user && await bcrypt.compare(password, user.password)) {
             req.flash("success", "로그인 성공!");
             req.session.user = {
-                id: user.id,
+                id: user.email,
                 name: user.name,
                 email: user.email
             };
