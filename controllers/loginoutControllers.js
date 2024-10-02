@@ -1,4 +1,4 @@
-//로그인 로그아웃
+// 로그인 로그아웃
 
 const db = require("../models/index");
 const User = db.user; // 기존 유저 테이블 사용
@@ -19,14 +19,15 @@ exports.authenticate = async (req, res, next) => {
                 email: user.email
             };
             res.locals.redirect = '/dashboard'; // 로그인 후 리다이렉트할 경로
+            return next(); // 리다이렉트 경로 설정 후 다음 미들웨어로 이동
         } else {
             req.flash("error", "이메일 또는 비밀번호가 올바르지 않습니다. 다시 시도해주세요.");
             res.locals.redirect = '/login'; // 로그인 페이지로 리다이렉트
+            return next(); // 리다이렉트 경로 설정 후 다음 미들웨어로 이동
         }
-        next(); // 다음 미들웨어로 이동
     } catch (error) {
         console.error('로그인 중 오류 발생:', error);
-        res.status(500).send('서버 내부 오류');
+        return res.status(500).send('서버 내부 오류'); // 에러 발생 시 적절한 응답
     }
 };
 
@@ -47,3 +48,4 @@ exports.logout = (req, res) => {
         res.redirect('/login'); // 로그인 페이지로 리다이렉트
     });
 };
+

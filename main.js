@@ -2,6 +2,8 @@ require('dotenv').config({ path: './.env' }); // dotenv 패키지 로드
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session'); // 세션 미들웨어
+const flash = require('connect-flash'); // 플래시 메시지 미들웨어
 const { Sequelize } = require('sequelize');
 const UserModel = require('./models/user'); // User 모델 파일 경로
 const MatchingModel = require('./models/matching');
@@ -16,23 +18,17 @@ const loginoutController = require('./controllers/loginoutController');
 
 const { authenticate, redirectView, logout } = require('./controllers/loginoutController'); // 로그인/로그아웃 컨트롤러 가져오기
 
-
 const app = express();
 
 // 미들웨어 설정
 app.use(bodyParser.json()); // JSON 요청 파싱
+app.use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: true })); // 세션 설정
+app.use(flash()); // 플래시 메시지 설정
 
 // 기본 경로에 대한 라우트 추가
 app.get('/', (req, res) => {
     res.send('Hello, World!'); // 기본 응답
 });
-
-// 환경 변수 출력
-console.log('DB_NAME:', process.env.DB_NAME);
-console.log('DB_USER:', process.env.DB_USER);
-console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
-console.log('DB_HOST:', process.env.DB_HOST);
-console.log('DB_PORT:', process.env.DB_PORT);
 
 // Sequelize 인스턴스 생성
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
@@ -74,9 +70,15 @@ app.post('/signup', signInController.signUp); // 회원가입 라우트 등록
 app.post('/login', authenticate, redirectView); // 로그인 라우트 등록
 app.post('/logout', logout); // 로그아웃 라우트 등록
 
+// 대시보드 라우트 (예시)
+app.get('/dashboard', (req, res) => {
+    res.send('Welcome to the dashboard!'); // 대시보드 기본 응답
+});
+
 // 서버 시작
-app.listen(80, () => {
-    console.log(`Server is running on port 80`);
+const PORT = process.env.PORT || 3000; // 포트 설정
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
 
 
