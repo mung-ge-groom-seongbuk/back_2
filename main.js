@@ -11,7 +11,7 @@ const GoalModel = require('./models/goal');
 const ChatModel = require('./models/chat');
 const NotificationModel = require('./models/notification');
 const UserLocationModel = require('./models/userLocation');
-const signInController = require('./controller/signinControllers'); // 회원가입 컨트롤러 가져오기
+const signInController = require('./controllers/signinControllers'); // 회원가입 컨트롤러 가져오기
 
 const app = express();
 
