@@ -1,6 +1,7 @@
 const db = require("../models/index");
 const User = db.user; // 기존 유저 테이블 사용
 const bcrypt = require('bcrypt');
+const { User } = require('../models'); // User 모델 불러오기
 
 exports.authenticate = async (req, res) => {
     const { email, password } = req.body;
