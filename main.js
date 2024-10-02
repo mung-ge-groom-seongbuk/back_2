@@ -1,7 +1,7 @@
 require('dotenv').config({ path: './.env' }); // dotenv 패키지 로드
-const express = require('express');
-const app = express();
 
+const express = require('express');
+const bodyParser = require('body-parser');
 const { Sequelize } = require('sequelize');
 const UserModel = require('./models/user'); // User 모델 파일 경로
 const MatchingModel = require('./models/matching');
@@ -11,6 +11,12 @@ const GoalModel = require('./models/goal');
 const ChatModel = require('./models/chat');
 const NotificationModel = require('./models/notification');
 const UserLocationModel = require('./models/userLocation');
+const signInController = require('./controller/signinControllers'); // 회원가입 컨트롤러 가져오기
+
+const app = express();
+
+// 미들웨어 설정
+app.use(bodyParser.json()); // JSON 요청 파싱
 
 // 환경 변수 출력
 console.log('DB_NAME:', process.env.DB_NAME);
@@ -27,6 +33,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     logging: console.log // 쿼리 로그 출력
 });
 
+// 모델 초기화
 const User = UserModel(sequelize);
 const Matching = MatchingModel(sequelize);
 const RunningData = RunningDataModel(sequelize);
@@ -52,18 +59,15 @@ const test = async () => {
 
 test();
 
-// 포트 설정 (80번 포트)
-app.set('port', 80);
-
-// 기본 경로에 대한 응답 설정
-app.get('/', (req, res) => {
-    res.send('Hello, you have reached the server!');
-});
+// 회원가입 라우트 등록
+app.post('/signup', signInController.signUp); // 회원가입 라우트 등록
 
 // 서버 시작
-app.listen(app.get('port'), () => {
-    console.log(`Server running on port: ${app.get('port')}`);
+app.listen(80, () => {
+    console.log(`Server is running on port 80`);
 });
+
+
 
 
 
