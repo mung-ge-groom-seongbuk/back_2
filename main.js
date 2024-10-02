@@ -7,7 +7,7 @@ const { Sequelize } = require('sequelize');
 const app = express();
 
 // 포트 설정
-app.set('port', process.env.PORT || 80);
+app.set('port', process.env.PORT || 3000);
 
 const UserModel = require('./models/user'); // User 모델 파일 경로
 const MatchingModel = require('./models/matching');
