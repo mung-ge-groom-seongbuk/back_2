@@ -1,6 +1,8 @@
 const db = require("../models/index");
 const { User } = require('../models'); 
 
+console.log("Received email:", email); // 이메일이 제대로 들어오는지 확인
+
 exports.updateProfile = async (req, res) => {
     const { email, nickname, intro } = req.body;
     const profile_picture = req.file ? req.file.path : null; // multer를 사용하여 파일 경로를 가져옴
