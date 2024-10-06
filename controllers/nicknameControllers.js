@@ -2,7 +2,7 @@
 
 
 const db = require("../models/index");
-const User = db.user; // User 모델 가져오기
+const { User } = require('../models');
 
 exports.updateProfile = async (req, res) => {
     const { user_id, nickname, intro } = req.body;
