@@ -6,8 +6,13 @@ exports.updateProfile = async (req, res) => {
     const { email, nickname, intro } = req.body;
     const profile_picture = req.file ? req.file.path : null; // multer를 사용하여 파일 경로를 가져옴
 
-    // email 값이 제대로 들어오는지 확인하는 로그 추가
+    // 이메일 값이 제대로 들어오는지 확인하는 로그 추가
     console.log("Received email:", email);
+
+    // 이메일이 제공되지 않은 경우 처리
+    if (!email) {
+        return res.status(400).json({ message: "이메일이 필요합니다." });
+    }
 
     try {
         // 이메일로 사용자 조회
@@ -21,9 +26,9 @@ exports.updateProfile = async (req, res) => {
         // 사용자의 닉네임, 프로필 사진, 한 줄 소개 업데이트
         await User.update(
             {
-                nickname: nickname,
-                intro: intro,
-                profile_picture: profile_picture, // 프로필 사진 경로 업데이트
+                nickname: nickname || user.nickname, // 닉네임이 없을 경우 기존 값을 유지
+                intro: intro || user.intro, // 한 줄 소개가 없을 경우 기존 값을 유지
+                profile_picture: profile_picture || user.profile_picture, // 프로필 사진 경로 업데이트
             },
             {
                 where: { email: email }, // 이메일 기준으로 업데이트
@@ -38,4 +43,5 @@ exports.updateProfile = async (req, res) => {
         res.status(500).json({ message: "서버 내부 오류" });
     }
 };
+
 

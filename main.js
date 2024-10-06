@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
+const multer = require('multer'); // multer 모듈 추가
 const db = require('./models/index'); // 모든 모델 가져오기
 const signInController = require('./controllers/signinControllers');
 const loginoutController = require('./controllers/loginoutControllers');
@@ -13,11 +14,20 @@ const app = express();
 
 // 미들웨어 설정
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // URL 인코딩된 데이터 처리
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
 app.use(flash());
 
-//zl.
-
+// multer 설정
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/'); // 파일이 저장될 디렉토리
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname); // 파일 이름 설정
+    }
+});
+const upload = multer({ storage: storage });
 
 // 기본 경로에 대한 라우트 추가
 app.get('/', (req, res) => {
@@ -28,7 +38,7 @@ app.get('/', (req, res) => {
 app.post('/signup', signInController.signUp);
 app.post('/login', loginoutController.authenticate, loginoutController.redirectView);
 app.post('/logout', loginoutController.logout);
-app.post('/updateProfile', nicknameController.updateProfile);
+app.post('/updateProfile', upload.single('profile_picture'), nicknameController.updateProfile); // multer를 사용하여 파일 업로드 처리
 
 // 대시보드 라우트 (예시)
 app.get('/dashboard', (req, res) => {
@@ -51,6 +61,7 @@ const PORT = process.env.PORT || 80;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
 
 
 
