@@ -1,17 +1,19 @@
 const db = require("../models/index");
-const { User } = require('../models'); 
-
-console.log("Received email:", email); // 이메일이 제대로 들어오는지 확인
+const User = db.user; // User 모델 가져오기
 
 exports.updateProfile = async (req, res) => {
+    // req.body로부터 email, nickname, intro 추출
     const { email, nickname, intro } = req.body;
     const profile_picture = req.file ? req.file.path : null; // multer를 사용하여 파일 경로를 가져옴
 
+    // email 값이 제대로 들어오는지 확인하는 로그 추가
+    console.log("Received email:", email);
+
     try {
-        // 이메일을 통해 사용자를 조회
+        // 이메일로 사용자 조회
         const user = await User.findOne({ where: { email: email } });
 
-        // 사용자가 존재하지 않을 경우 처리
+        // 사용자가 존재하지 않을 경우
         if (!user) {
             return res.status(404).json({ message: '해당 이메일로 가입된 사용자를 찾을 수 없습니다.' });
         }
@@ -24,7 +26,7 @@ exports.updateProfile = async (req, res) => {
                 profile_picture: profile_picture, // 프로필 사진 경로 업데이트
             },
             {
-                where: { email: email }, // 이메일을 기준으로 사용자 업데이트
+                where: { email: email }, // 이메일 기준으로 업데이트
             }
         );
 
