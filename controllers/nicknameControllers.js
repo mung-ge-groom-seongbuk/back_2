@@ -1,15 +1,20 @@
-//프로필 사진 등록, 닉네임 설정
-
-
 const db = require("../models/index");
-const { User } = require('../models');
+const { User } = require('../models'); 
 
 exports.updateProfile = async (req, res) => {
-    const { user_id, nickname, intro } = req.body;
-    const profile_picture = req.file ? req.file.path : null; // multer를 사용하여 파일 경로를 가져온다고 가정
+    const { email, nickname, intro } = req.body;
+    const profile_picture = req.file ? req.file.path : null; // multer를 사용하여 파일 경로를 가져옴
 
     try {
-        // 사용자의 닉네임과 한 줄 소개 업데이트
+        // 이메일을 통해 사용자를 조회
+        const user = await User.findOne({ where: { email: email } });
+
+        // 사용자가 존재하지 않을 경우 처리
+        if (!user) {
+            return res.status(404).json({ message: '해당 이메일로 가입된 사용자를 찾을 수 없습니다.' });
+        }
+
+        // 사용자의 닉네임, 프로필 사진, 한 줄 소개 업데이트
         await User.update(
             {
                 nickname: nickname,
@@ -17,7 +22,7 @@ exports.updateProfile = async (req, res) => {
                 profile_picture: profile_picture, // 프로필 사진 경로 업데이트
             },
             {
-                where: { id: user_id }, // 특정 사용자 조회
+                where: { email: email }, // 이메일을 기준으로 사용자 업데이트
             }
         );
 
@@ -29,3 +34,4 @@ exports.updateProfile = async (req, res) => {
         res.status(500).json({ message: "서버 내부 오류" });
     }
 };
+
