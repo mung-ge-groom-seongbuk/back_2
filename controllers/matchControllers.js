@@ -1,5 +1,3 @@
-// 매칭 관련... 
-
 const { User, Matching, RunningData, Sequelize } = require('../models');
 const { Op } = require('sequelize');
 
@@ -22,33 +20,38 @@ exports.getNearbyUsers = async (req, res) => {
             where: Sequelize.literal(`ST_Distance_Sphere(
                 point(${longitude}, ${latitude}), point(longitude, latitude)
             ) <= 3000`), // 반경 3km
-            attributes: ['user_id','nickname', 'intro']
+            attributes: ['user_id', 'nickname', 'intro']
         });
 
         res.status(200).json(nearbyUsers);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Failed to fetch nearby users.' });
+        res.status(500).json({ error: '근처 사용자 목록을 가져오는 데 실패했습니다.' });
     }
 };
 
 // 매칭 요청 보내기
 exports.sendMatchRequest = async (req, res) => {
     try {
-        const { responder_id, message } = req.body; // 요청자 ID는 req.user에서 가져올 것
+        const { responder_id, message } = req.body;
+
+        // 메시지 길이 검증
+        if (message && message.length > 500) {
+            return res.status(400).json({ error: '메시지는 500자 이하이어야 합니다.' });
+        }
 
         // 매칭 요청 생성
         const newMatch = await Matching.create({
             requester_id: req.user.user_id, // 요청자의 ID를 req.user에서 가져옴
             responder_id,
             message,
-            status: 'pending'
+            status: 'requested' // 상태 값을 'requested'로 설정
         });
 
-        res.status(200).json({ message: 'Match request sent.', match: newMatch });
+        res.status(200).json({ message: '매칭 요청이 전송되었습니다.', match: newMatch });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Failed to send match request.' });
+        res.status(500).json({ error: '매칭 요청 전송에 실패했습니다.' });
     }
 };
 
@@ -56,7 +59,7 @@ exports.sendMatchRequest = async (req, res) => {
 exports.getMatchRequests = async (req, res) => {
     try {
         const matchRequests = await Matching.findAll({
-            where: { responder_id: req.user.user_id, status: 'pending' },
+            where: { responder_id: req.user.user_id, status: 'requested' }, // 상태를 'requested'로 필터링
             include: [
                 {
                     model: User,
@@ -69,7 +72,7 @@ exports.getMatchRequests = async (req, res) => {
         res.status(200).json(matchRequests);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Failed to fetch match requests.' });
+        res.status(500).json({ error: '매칭 요청 목록을 가져오는 데 실패했습니다.' });
     }
 };
 
@@ -80,10 +83,11 @@ exports.acceptMatch = async (req, res) => {
 
         await Matching.update({ status: 'accepted' }, { where: { match_id } });
 
-        res.status(200).json({ message: 'Match accepted.' });
+        res.status(200).json({ message: '매칭 요청이 수락되었습니다.' });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Failed to accept match request.' });
+        res.status(500).json({ error: '매칭 요청 수락에 실패했습니다.' });
     }
 };
+
 
