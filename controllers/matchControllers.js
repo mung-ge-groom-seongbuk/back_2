@@ -22,7 +22,7 @@ exports.getNearbyUsers = async (req, res) => {
             where: Sequelize.literal(`ST_Distance_Sphere(
                 point(${longitude}, ${latitude}), point(longitude, latitude)
             ) <= 3000`), // 반경 3km
-            attributes: ['nickname', 'intro']
+            attributes: ['user_id','nickname', 'intro']
         });
 
         res.status(200).json(nearbyUsers);
