@@ -1,4 +1,4 @@
-const { Chat } = require("../models/index");
+const { Chat, User } = require("../models/index");
 const { Op } = require("sequelize");
 
 // 메시지 전송
@@ -14,6 +14,17 @@ exports.sendMessage = async (req, res) => {
     }
 
     try {
+        // sender와 receiver가 모두 존재하는지 확인
+        const sender = await User.findOne({ where: { user_id: sender_id } });
+        const receiver = await User.findOne({ where: { user_id: receiver_id } });
+
+        if (!sender || !receiver) {
+            return res.status(404).json({
+                success: false,
+                message: "Sender or receiver does not exist.",
+            });
+        }
+
         const newMessage = await Chat.create({
             sender_id,
             receiver_id,
@@ -37,39 +48,4 @@ exports.sendMessage = async (req, res) => {
     }
 };
 
-// 메시지 조회
-exports.getMessages = async (req, res) => {
-    const { sender_id, receiver_id } = req.params;
-
-    // 입력 데이터 유효성 검사
-    if (!sender_id || !receiver_id) {
-        return res.status(400).json({
-            success: false,
-            message: "sender_id and receiver_id are required.",
-        });
-    }
-
-    try {
-        const messages = await Chat.findAll({
-            where: {
-                [Op.or]: [
-                    { sender_id: sender_id, receiver_id: receiver_id },
-                    { sender_id: receiver_id, receiver_id: sender_id },
-                ],
-            },
-            order: [['created_at', 'ASC']],
-        });
-
-        return res.status(200).json({
-            success: true,
-            data: messages,
-        });
-    } catch (error) {
-        console.error("Error retrieving messages:", error); // 에러 로그 출력
-        return res.status(500).json({
-            success: false,
-            message: "메시지 조회에 실패했습니다.",
-        });
-    }
-};
 
