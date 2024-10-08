@@ -47,6 +47,13 @@ exports.getNearbyUsers = async (req, res) => {
 
 // 매칭 요청 보내기
 exports.sendMatchRequest = async (req, res) => {
+    // 세션에서 사용자 정보 확인
+    const user = req.session.user; // 세션에서 사용자 정보를 가져옵니다.
+
+    if (!user) {
+        return res.status(401).json({ error: '로그인이 필요합니다.' });
+    }
+
     try {
         const { responder_id, message } = req.body;
 
@@ -57,7 +64,7 @@ exports.sendMatchRequest = async (req, res) => {
 
         // 매칭 요청 생성
         const newMatch = await Matching.create({
-            requester_id: req.user.user_id, // 요청자의 ID를 req.user에서 가져옴
+            requester_id: user.user_id, // 요청자의 ID를 세션에서 가져옴
             responder_id,
             message,
             status: 'requested' // 상태 값을 'requested'로 설정
@@ -69,6 +76,7 @@ exports.sendMatchRequest = async (req, res) => {
         res.status(500).json({ error: '매칭 요청 전송에 실패했습니다.' });
     }
 };
+
 
 // 받은 매칭 요청 목록 가져오기
 exports.getMatchRequests = async (req, res) => {
