@@ -1,41 +1,46 @@
 const { User, Matching, RunningData,UserLocation, Sequelize } = require('../models');
-const { Op } = require('sequelize');
+const { Sequelize, Op } = require('sequelize');
+
 
 //반경 3km이내 사용자 목록
 exports.getNearbyUsers = async (req, res) => {
     try {
-        const { latitude, longitude } = req.query; // 현재 사용자의 좌표를 쿼리에서 받음
-
-        const nearbyUsers = await User.findAll({
+        const users = await User.findAll({
+            attributes: [
+                'user_id',
+                'nickname',
+                'intro',
+                [Sequelize.fn('COUNT', Sequelize.col('RunningData.run_id')), 'run_count'],
+                [Sequelize.fn('SUM', Sequelize.col('RunningData.distance_km')), 'total_distance'],
+                [Sequelize.fn('AVG', Sequelize.col('RunningData.pace')), 'avg_pace'],
+                'UserLocation.id',
+                'UserLocation.latitude',
+                'UserLocation.longitude'
+            ],
             include: [
                 {
                     model: RunningData,
-                    attributes: [
-                        [Sequelize.fn('COUNT', Sequelize.col('run_id')), 'run_count'],
-                        [Sequelize.fn('SUM', Sequelize.col('distance_km')), 'total_distance'],
-                        [Sequelize.fn('AVG', Sequelize.col('pace')), 'avg_pace']
-                    ]
+                    attributes: [] // RunningData의 컬럼은 COUNT, SUM, AVG로 대체하므로 빈 배열로 설정
                 },
                 {
-                    model: UserLocation, // Add UserLocation model to include user location
-                    attributes: ['latitude', 'longitude'] // Make sure to include latitude and longitude
+                    model: UserLocation,
+                    attributes: []
                 }
             ],
-            where: Sequelize.literal(`ST_Distance_Sphere(
-                point(${longitude}, ${latitude}), point(UserLocation.longitude, UserLocation.latitude)
-            ) <= 3000`), // 반경 3km
-            attributes: ['user_id', 'nickname', 'intro']
+            where: Sequelize.where(
+                Sequelize.fn('ST_Distance_Sphere',
+                    Sequelize.fn('point', 126.978, 37.5665),
+                    Sequelize.fn('point', { longitude: Sequelize.col('UserLocation.longitude'), latitude: Sequelize.col('UserLocation.latitude') })
+                ),
+                { [Op.lte]: 3000 }
+            ),
+            group: ['User.user_id', 'User.nickname', 'User.intro', 'UserLocation.id', 'UserLocation.latitude', 'UserLocation.longitude']
         });
 
-        // 사용자 목록이 비어 있는지 확인
-        if (nearbyUsers.length === 0) {
-            return res.status(404).json({ message: '근처에 사용자가 없습니다.' });
-        }
-
-        res.status(200).json(nearbyUsers);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: '근처 사용자 목록을 가져오는 데 실패했습니다.' });
+        return res.json(users);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
     }
 };
 
