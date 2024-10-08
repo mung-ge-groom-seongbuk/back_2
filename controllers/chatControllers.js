@@ -1,51 +1,69 @@
-const { Chat, User } = require("../models/index");
+const { Chat, User } = require('../models'); // Chat과 User 모델을 가져옵니다.
 const { Op } = require("sequelize");
 
-// 메시지 전송
 exports.sendMessage = async (req, res) => {
-    const { sender_id, receiver_id, message } = req.body;
-
-    // 입력 데이터 유효성 검사
-    if (!sender_id || !receiver_id || !message) {
-        return res.status(400).json({
-            success: false,
-            message: "sender_id, receiver_id, and message are required.",
-        });
-    }
-
     try {
-        // sender와 receiver가 모두 존재하는지 확인
-        const sender = await User.findOne({ where: { user_id: sender_id } });
-        const receiver = await User.findOne({ where: { user_id: receiver_id } });
+        const { sender_id, receiver_id, message } = req.body;
 
-        if (!sender || !receiver) {
-            return res.status(404).json({
-                success: false,
-                message: "Sender or receiver does not exist.",
-            });
-        }
-
-        const newMessage = await Chat.create({
+        // 새로운 메시지 생성
+        const chatMessage = await Chat.create({
             sender_id,
             receiver_id,
             message,
-            created_at: new Date(),
+            created_at: new Date()
         });
 
-        // 클라이언트로 메시지 전송
-        req.io.emit('chatMessage', newMessage);
-
-        return res.status(200).json({
+        res.status(201).json({
             success: true,
-            data: newMessage,
+            message: '메시지가 전송되었습니다.',
+            chatMessage
         });
     } catch (error) {
-        console.error("Error sending message:", error); // 에러 로그 출력
-        return res.status(500).json({
+        console.error(error);
+        res.status(500).json({
             success: false,
-            message: "메시지 전송에 실패했습니다.",
+            message: '메시지 전송 중 오류가 발생했습니다.'
         });
     }
 };
+
+exports.getMessages = async (req, res) => {
+    try {
+        const { sender_id, receiver_id } = req.params;
+
+        // 특정 송신자와 수신자 간의 메시지 조회
+        const messages = await Chat.findAll({
+            where: {
+                sender_id,
+                receiver_id
+            },
+            include: [
+                {
+                    model: User,
+                    as: 'sender',
+                    attributes: ['user_id', 'nickname', 'profile_picture'], // 송신자 정보 포함
+                },
+                {
+                    model: User,
+                    as: 'receiver',
+                    attributes: ['user_id', 'nickname', 'profile_picture'], // 수신자 정보 포함
+                }
+            ],
+            order: [['created_at', 'ASC']] // 메시지를 시간 순으로 정렬
+        });
+
+        res.status(200).json({
+            success: true,
+            messages
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: '메시지 조회 중 오류가 발생했습니다.'
+        });
+    }
+};
+
 
 
