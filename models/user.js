@@ -52,6 +52,7 @@ module.exports = (sequelize) => {
     // User와 RunningData 관계 설정
     User.associate = (models) => {
         User.hasMany(models.RunningData, { foreignKey: 'user_id' });
+        User.hasOne(models.UserLocation, { foreignKey: 'user_id' }); // UserLocation과의 관계 추가
     };
 
     return User;

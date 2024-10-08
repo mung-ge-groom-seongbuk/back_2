@@ -3,7 +3,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-    const UserLocation = sequelize.define("userLocation", {
+    const UserLocation = sequelize.define("UserLocation", {
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
