@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
         nickname: {
             type: DataTypes.STRING(50),
             allowNull: true, //NULL 허용
-            defaultValue:'',
+            defaultValue: '',
         },
         profile_picture: {
             type: DataTypes.STRING(255),
@@ -48,5 +48,11 @@ module.exports = (sequelize) => {
         tableName: "user", // 테이블명 설정
         timestamps: false // createdAt, updatedAt 자동 생성 방지
     });
+
+    // User와 RunningData 관계 설정
+    User.associate = (models) => {
+        User.hasMany(models.RunningData, { foreignKey: 'user_id' });
+    };
+
     return User;
-}
+};

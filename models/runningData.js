@@ -1,9 +1,7 @@
-//running_data table
-
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-    const RunningData = sequelize.define("runningData", {
+    const RunningData = sequelize.define("RunningData", {
         run_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -51,5 +49,12 @@ module.exports = (sequelize) => {
         tableName: "runningData", // 테이블명 설정
         timestamps: false // createdAt, updatedAt 자동 생성 방지
     });
+
+    // RunningData와 User 관계 설정
+    RunningData.associate = (models) => {
+        RunningData.belongsTo(models.User, { foreignKey: 'user_id' });
+    };
+
     return RunningData;
-}
+};
+
