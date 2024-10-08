@@ -23,12 +23,18 @@ exports.getNearbyUsers = async (req, res) => {
             attributes: ['user_id', 'nickname', 'intro']
         });
 
+        // 사용자 목록이 비어 있는지 확인
+        if (nearbyUsers.length === 0) {
+            return res.status(404).json({ message: '근처에 사용자가 없습니다.' });
+        }
+
         res.status(200).json(nearbyUsers);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: '근처 사용자 목록을 가져오는 데 실패했습니다.' });
     }
 };
+
 
 // 매칭 요청 보내기
 exports.sendMatchRequest = async (req, res) => {
