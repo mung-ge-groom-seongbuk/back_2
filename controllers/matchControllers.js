@@ -1,4 +1,4 @@
-const { User, Matching, RunningData, Sequelize } = require('../models');
+const { User, Matching, RunningData,UserLocation, Sequelize } = require('../models');
 const { Op } = require('sequelize');
 
 //반경 3km이내 사용자 목록
