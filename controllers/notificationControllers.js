@@ -4,17 +4,21 @@ const { Matching, User } = require('../models');
 
 // 매칭 알림 확인 (매칭 요청 받은 경우)
 exports.getMatchNotifications = async (req, res) => {
+    if (!req.session.user_id) {
+        return res.status(401).json({ error: 'Unauthorized. Please log in.' }); // 로그인이 필요함
+    }
+
     try {
         const matchRequests = await Matching.findAll({
-            where: { responder_id: req.user.user_id, status: 'pending' }, // 받은 매칭 요청만 조회
+            where: { responder_id: req.session.user_id, status: 'pending' },
             include: [
                 {
                     model: User,
                     as: 'requester',
-                    attributes: ['nickname', 'intro'] // 요청자의 닉네임과 한줄 소개 포함
+                    attributes: ['nickname', 'intro']
                 }
             ],
-            attributes: ['message'], // 요청자가 작성한 메시지를 포함
+            attributes: ['message'],
         });
 
         if (matchRequests.length === 0) {
@@ -27,6 +31,7 @@ exports.getMatchNotifications = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch match notifications.' });
     }
 };
+
 
 // 매칭 요청 수락 또는 거절
 exports.respondToMatch = async (req, res) => {

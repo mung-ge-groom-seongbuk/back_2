@@ -23,7 +23,11 @@ const io = socketIo(server);
 // 미들웨어 설정
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
+app.use(session({ 
+    secret: process.env.SESSION_SECRET, 
+    resave: false, 
+    saveUninitialized: false // 세션이 새로 생성되었을 때만 저장
+}));
 app.use(flash());
 
 // multer 설정
