@@ -1,4 +1,4 @@
-//user_location table
+//userLocation table
 
 const { DataTypes } = require("sequelize");
 
