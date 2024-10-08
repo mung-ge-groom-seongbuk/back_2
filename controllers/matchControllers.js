@@ -1,7 +1,7 @@
 const { User, Matching, RunningData, Sequelize } = require('../models');
 const { Op } = require('sequelize');
 
-// 반경 3km 이내 사용자 목록 가져오기
+//반경 3km이내 사용자 목록
 exports.getNearbyUsers = async (req, res) => {
     try {
         const { latitude, longitude } = req.query; // 현재 사용자의 좌표를 쿼리에서 받음
@@ -15,10 +15,14 @@ exports.getNearbyUsers = async (req, res) => {
                         [Sequelize.fn('SUM', Sequelize.col('distance_km')), 'total_distance'],
                         [Sequelize.fn('AVG', Sequelize.col('pace')), 'avg_pace']
                     ]
+                },
+                {
+                    model: UserLocation, // Add UserLocation model to include user location
+                    attributes: ['latitude', 'longitude'] // Make sure to include latitude and longitude
                 }
             ],
             where: Sequelize.literal(`ST_Distance_Sphere(
-                point(${longitude}, ${latitude}), point(longitude, latitude)
+                point(${longitude}, ${latitude}), point(UserLocation.longitude, UserLocation.latitude)
             ) <= 3000`), // 반경 3km
             attributes: ['user_id', 'nickname', 'intro']
         });
@@ -34,6 +38,7 @@ exports.getNearbyUsers = async (req, res) => {
         res.status(500).json({ error: '근처 사용자 목록을 가져오는 데 실패했습니다.' });
     }
 };
+
 
 
 // 매칭 요청 보내기
