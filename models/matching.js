@@ -3,7 +3,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-    const Matching = sequelize.define("matching", {
+    const Matching = sequelize.define("Matching", {
         match_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,

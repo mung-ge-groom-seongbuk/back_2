@@ -3,7 +3,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-    const DailyData = sequelize.define("dailyData", {
+    const DailyData = sequelize.define("DailyData", {
         daily_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,

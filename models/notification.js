@@ -3,7 +3,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-    const Notification = sequelize.define("notification", {
+    const Notification = sequelize.define("Notification", {
         notification_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,

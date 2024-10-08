@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
         },
         nickname: {
             type: DataTypes.STRING(50),
-            allowNull: true, //NULL 허용
+            allowNull: true, // NULL 허용
             defaultValue: '',
         },
         profile_picture: {
@@ -49,11 +49,19 @@ module.exports = (sequelize) => {
         timestamps: false // createdAt, updatedAt 자동 생성 방지
     });
 
-    // User와 RunningData 관계 설정
+    // User와 다른 모델 간의 관계 설정
     User.associate = (models) => {
-        User.hasMany(models.RunningData, { foreignKey: 'user_id' });
-        User.hasOne(models.UserLocation, { foreignKey: 'user_id' }); // UserLocation과의 관계 추가
+        User.hasMany(models.Running_Data, { foreignKey: 'user_id' }); // Running_Data와의 관계
+        User.hasMany(models.Daily_Data, { foreignKey: 'user_id' }); // Daily_Data와의 관계 추가
+        User.hasMany(models.Goal, { foreignKey: 'user_id' }); // Goal과의 관계 추가
+        User.hasMany(models.Matching, { foreignKey: 'requester_id' }); // Matching과의 관계 추가 (요청자)
+        User.hasMany(models.Matching, { foreignKey: 'responder_id' }); // Matching과의 관계 추가 (응답자)
+        User.hasOne(models.UserLocation, { foreignKey: 'user_id' }); // UserLocation과의 관계
+        User.hasOne(models.Notification, { foreignKey: 'user_id' }); // Notification과의 관계 추가
+        User.hasMany(models.Chat, { foreignKey: 'sender_id' }); // Chat과의 관계 추가 (보낸 사람)
+        User.hasMany(models.Chat, { foreignKey: 'receiver_id' }); // Chat과의 관계 추가 (받는 사람)
     };
 
     return User;
 };
+
