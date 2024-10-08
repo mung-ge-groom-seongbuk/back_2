@@ -63,9 +63,12 @@ app.post('/logout', loginoutController.logout);
 app.post('/updateProfile', upload.single('profile_picture'), nicknameController.updateProfile);
 
 // 매칭 라우트 등록
-app.get('/matches', matchController.getMatches); // 매칭 페이지에서 사용자 목록 조회
+app.get('/matches', matchController.getNearbyUsers); // 사용자 목록 조회
 app.post('/matches/send', matchController.sendMatchRequest); // 매칭 요청 전송
-app.post('/matches/notifications', matchController.getNotifications); // 매칭 알림 조회
+
+// 알림 라우트 등록
+app.get('/notifications', notificationController.getMatchNotifications); // 매칭 알림 확인
+app.post('/notifications/respond', notificationController.respondToMatch); // 매칭 요청 수락/거절
 
 // 채팅 라우트 등록
 app.post('/chat/send', chatController.sendMessage); // 메시지 전송
