@@ -1,9 +1,10 @@
-const { User, Matching, RunningData,UserLocation, Sequelize } = require('../models');
+const { User, Matching, RunningData, UserLocation, Sequelize } = require('../models');
 const { Op } = require('sequelize');
 
-
-//반경 3km이내 사용자 목록
+// 반경 3km 이내 사용자 목록
 exports.getNearbyUsers = async (req, res) => {
+    const { longitude, latitude } = req.body; // 요청에서 경도와 위도를 가져옵니다.
+
     try {
         const users = await User.findAll({
             attributes: [
@@ -29,8 +30,8 @@ exports.getNearbyUsers = async (req, res) => {
             ],
             where: Sequelize.where(
                 Sequelize.fn('ST_Distance_Sphere',
-                    Sequelize.fn('point', 126.978, 37.5665),
-                    Sequelize.fn('point', { longitude: Sequelize.col('UserLocation.longitude'), latitude: Sequelize.col('UserLocation.latitude') })
+                    Sequelize.fn('point', longitude, latitude),
+                    Sequelize.fn('point', Sequelize.col('UserLocation.longitude'), Sequelize.col('UserLocation.latitude'))
                 ),
                 { [Op.lte]: 3000 }
             ),
@@ -43,8 +44,6 @@ exports.getNearbyUsers = async (req, res) => {
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 };
-
-
 
 // 매칭 요청 보내기
 exports.sendMatchRequest = async (req, res) => {
