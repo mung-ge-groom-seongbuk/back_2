@@ -75,7 +75,7 @@ app.post('/chat/send', chatController.sendMessage); // 메시지 전송
 app.get('/chat/messages/:sender_id/:receiver_id', chatController.getMessages); // 메시지 조회
 
 // 지도 라우트 등록
-app.get('/map', mapController.getUserLocation); // 사용자 위치 조회
+app.get('/map', mapController.getMatchedUsersLocation); // 사용자 위치 조회
 
 // 404 에러 핸들러
 app.use((req, res, next) => {
