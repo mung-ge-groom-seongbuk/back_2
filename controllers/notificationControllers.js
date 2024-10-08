@@ -1,4 +1,4 @@
-//알림 설정
+// 알림 설정
 
 const { Matching, User } = require('../models');
 
@@ -13,11 +13,14 @@ exports.getMatchNotifications = async (req, res) => {
                     as: 'requester',
                     attributes: ['nickname', 'intro'] // 요청자의 닉네임과 한줄 소개 포함
                 }
-            ]
+            ],
+            attributes: ['message'], // 요청자가 작성한 메시지를 포함
         });
+
         if (matchRequests.length === 0) {
             return res.status(200).json({ message: 'No match requests.' });
         }
+
         res.status(200).json(matchRequests);
     } catch (err) {
         console.error(err);
@@ -43,3 +46,4 @@ exports.respondToMatch = async (req, res) => {
         res.status(500).json({ error: 'Failed to respond to match request.' });
     }
 };
+

@@ -1,4 +1,4 @@
-//매칭 관련... 
+// 매칭 관련... 
 
 const { User, Matching, RunningData, Sequelize } = require('../models');
 const { Op } = require('sequelize');
@@ -35,11 +35,11 @@ exports.getNearbyUsers = async (req, res) => {
 // 매칭 요청 보내기
 exports.sendMatchRequest = async (req, res) => {
     try {
-        const { requester_id, responder_id, message } = req.body;
+        const { responder_id, message } = req.body; // 요청자 ID는 req.user에서 가져올 것
 
         // 매칭 요청 생성
         const newMatch = await Matching.create({
-            requester_id,
+            requester_id: req.user.user_id, // 요청자의 ID를 req.user에서 가져옴
             responder_id,
             message,
             status: 'pending'
@@ -86,3 +86,4 @@ exports.acceptMatch = async (req, res) => {
         res.status(500).json({ error: 'Failed to accept match request.' });
     }
 };
+
