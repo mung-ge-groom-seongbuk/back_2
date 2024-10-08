@@ -51,8 +51,8 @@ module.exports = (sequelize) => {
 
     // User와 다른 모델 간의 관계 설정
     User.associate = (models) => {
-        User.hasMany(models.Running_Data, { foreignKey: 'user_id' }); // Running_Data와의 관계
-        User.hasMany(models.Daily_Data, { foreignKey: 'user_id' }); // Daily_Data와의 관계 추가
+        User.hasMany(models.RunningData, { foreignKey: 'user_id' }); // Running_Data와의 관계
+        User.hasMany(models.DailyData, { foreignKey: 'user_id' }); // Daily_Data와의 관계 추가
         User.hasMany(models.Goal, { foreignKey: 'user_id' }); // Goal과의 관계 추가
         User.hasMany(models.Matching, { foreignKey: 'requester_id' }); // Matching과의 관계 추가 (요청자)
         User.hasMany(models.Matching, { foreignKey: 'responder_id' }); // Matching과의 관계 추가 (응답자)
