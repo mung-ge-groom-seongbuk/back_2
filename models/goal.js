@@ -29,10 +29,15 @@ module.exports = (sequelize) => {
             allowNull: false,
             comment: '목표 종료 날짜'
         },
-        goal_type: {
-            type: DataTypes.ENUM('distance', 'calories'),
-            allowNull: false,
-            comment: '목표 종류 (거리 또는 칼로리)'
+        goal_km: { // 목표 거리
+            type: DataTypes.DECIMAL(5, 2),
+            allowNull: true,
+            comment: '목표 달리고자 하는 거리'
+        },
+        goal_calories: { // 목표 칼로리
+            type: DataTypes.DECIMAL(5, 2),
+            allowNull: true,
+            comment: '목표 소모하고자 하는 칼로리'
         },
         created_at: {
             type: DataTypes.DATE,
