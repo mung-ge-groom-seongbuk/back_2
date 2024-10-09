@@ -16,6 +16,7 @@ const matchController = require('./controllers/matchControllers');
 const notificationController = require('./controllers/notificationControllers');
 const chatController = require('./controllers/chatControllers');
 const mapController = require('./controllers/mapControllers');
+const path = require('path');
 
 const app = express();
 const server = http.createServer(app);
@@ -41,6 +42,9 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
+
+// uploads 디렉토리를 정적 파일 제공
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Firebase Cloud Messaging 사용 예시
 const sendFirebaseNotification = async (registrationToken, payload) => {

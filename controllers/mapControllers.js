@@ -17,7 +17,7 @@ exports.getMatchedUsersLocation = async (req, res) => {
                 {
                     model: User,
                     as: 'requester',
-                    attributes: ['nickname', 'intro'],
+                    attributes: ['nickname', 'intro','profile_picture'],
                     include: [
                         {
                             model: UserLocation,
@@ -36,7 +36,7 @@ exports.getMatchedUsersLocation = async (req, res) => {
                 {
                     model: User,
                     as: 'responder',
-                    attributes: ['nickname', 'intro'],
+                    attributes: ['nickname', 'intro','profile_picture'],
                     include: [
                         {
                             model: UserLocation,
