@@ -18,6 +18,10 @@ const notificationController = require('./controllers/notificationControllers');
 const chatController = require('./controllers/chatControllers');
 const mapController = require('./controllers/mapControllers');
 const userController = require('./controllers/userControllers');
+const runController = require('./controllers/runControllers');
+const dailyController = require('./controllers/dailyControllers');
+const goalController = require('./controllers/goalControllers');
+const runprofileController = require('./controllers/runprofileControllers');
 const path = require('path');
 
 const app = express();
@@ -114,6 +118,21 @@ app.get('/chat/messages/:sender_id/:receiver_id', chatController.getMessages); /
 
 // 지도 라우트 등록
 app.get('/map', mapController.getMatchedUsersLocation); // 사용자 위치 조회
+
+// DailyData 관련 라우트 등록
+app.post('/daily/runs', dailyController.saveDailyRunData); // 하루의 달리기 기록 저장
+app.get('/daily/summary/:userId', dailyController.getDailySummary); // 사용자 달리기 기록 요약 조회
+
+// RunningData 관련 라우트 등록
+app.post('/running', runController.startRun); // 달리기 기록 시작 및 저장
+app.get('/running/:userId', runController.getRunRecords); // 사용자 달리기 기록 조회
+
+// Goal 관련 라우트 등록
+app.post('/goals', goalController.setGoal); // 목표 설정
+app.get('/goals/:userId', goalController.getGoals); // 사용자 목표 조회
+
+// 사용자 프로필 조회 라우트 등록
+app.get('/profile/:userId', runprofileController.getUserProfile); // 사용자 프로필 조회
 
 app.get('/users', userController.getAllUsers); // 모든 유저 정보 조회
 
