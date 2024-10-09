@@ -32,6 +32,16 @@ app.use(session({
 }));
 app.use(flash());
 
+// Firebase Cloud Messaging 사용 예시
+const sendFirebaseNotification = async (registrationToken, payload) => {
+    try {
+        await firebaseAdmin.messaging().sendToDevice(registrationToken, payload);
+        console.log('Notification sent successfully');
+    } catch (error) {
+        console.error('Error sending notification:', error);
+    }
+};
+
 // 푸시 알림 테스트 라우트
 app.post('/test-notification', async (req, res) => {
     const { token } = req.body; // 요청 본문에서 토큰을 가져옴
@@ -69,16 +79,6 @@ const upload = multer({ storage: storage });
 
 // uploads 디렉토리를 정적 파일 제공
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-// Firebase Cloud Messaging 사용 예시
-const sendFirebaseNotification = async (registrationToken, payload) => {
-    try {
-        await firebaseAdmin.messaging().sendToDevice(registrationToken, payload);
-        console.log('Notification sent successfully');
-    } catch (error) {
-        console.error('Error sending notification:', error);
-    }
-};
 
 // Socket.IO 설정
 io.on('connection', (socket) => {
@@ -120,11 +120,6 @@ app.get('/chat/messages/:sender_id/:receiver_id', chatController.getMessages); /
 // 지도 라우트 등록
 app.get('/map', mapController.getMatchedUsersLocation); // 사용자 위치 조회
 
-// main.js 파일에 아래 코드를 추가
-
-
-
-
 // 404 에러 핸들러
 app.use((req, res, next) => {
     res.status(404).send('Not Found');
@@ -139,7 +134,7 @@ app.use((err, req, res, next) => {
 // 서버 시작
 const PORT = process.env.PORT || 80;
 server.listen(PORT, () => {
-    console.log(Server is running on port ${PORT});
+    console.log(`Server is running on port ${PORT}`);
 });
 
 
