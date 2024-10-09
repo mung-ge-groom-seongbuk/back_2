@@ -18,12 +18,14 @@ const sendFirebaseNotification = async (registrationToken, title, body) => {
     };
 
     try {
+        // FCM에 알림을 전송합니다.
         const response = await admin.messaging().send(payload); // payload를 전송
         console.log('Notification sent successfully:', response);
     } catch (error) {
         console.error('Error sending notification:', error);
     }
 };
+
 
 module.exports = { sendFirebaseNotification };
 
