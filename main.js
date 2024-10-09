@@ -33,15 +33,7 @@ app.use(session({
 }));
 app.use(flash());
 
-// Firebase Cloud Messaging 사용 예시
-const sendFirebaseNotification = async (registrationToken, payload) => {
-    try {
-        await firebaseAdmin.messaging().sendToDevice(registrationToken, payload);
-        console.log('Notification sent successfully');
-    } catch (error) {
-        console.error('Error sending notification:', error);
-    }
-};
+
 
 // 푸시 알림 테스트 라우트
 app.post('/test-notification', async (req, res) => {
