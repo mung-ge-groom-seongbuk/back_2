@@ -2,7 +2,8 @@
 const admin = require('firebase-admin');
 
 // Firebase Admin SDK 서비스 계정 키 경로
-const serviceAccount = require('./config/serviceAccountKey.json');
+const serviceAccount = require('./serviceAccountKey.json');
+
 
 
 admin.initializeApp({
