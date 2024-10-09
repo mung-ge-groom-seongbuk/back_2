@@ -8,6 +8,7 @@ const multer = require('multer');
 const http = require('http');
 const socketIo = require('socket.io');
 const db = require('./models/index');
+const firebaseAdmin = require('./config/firebase'); // Firebase 설정 파일 불러오기
 const signInController = require('./controllers/signinControllers');
 const loginoutController = require('./controllers/loginoutControllers');
 const nicknameController = require('./controllers/nicknameControllers');
@@ -40,6 +41,16 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
+
+// Firebase Cloud Messaging 사용 예시
+const sendFirebaseNotification = async (registrationToken, payload) => {
+    try {
+        await firebaseAdmin.messaging().sendToDevice(registrationToken, payload);
+        console.log('Notification sent successfully');
+    } catch (error) {
+        console.error('Error sending notification:', error);
+    }
+};
 
 // Socket.IO 설정
 io.on('connection', (socket) => {
@@ -97,6 +108,7 @@ const PORT = process.env.PORT || 80;
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
 
 
 
