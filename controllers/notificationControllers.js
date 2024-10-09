@@ -53,6 +53,10 @@ exports.respondToMatch = async (req, res) => {
                     notification: {
                         title: '매칭 수락됨',
                         body: '상대방이 매칭 요청을 수락했습니다.',
+                    },
+                    data: {
+                        match_id: match_id.toString(), // 필요한 추가 데이터
+                        action: 'accept'
                     }
                 };
                 await sendFirebaseNotification(requester.firebase_token, payload);
@@ -67,6 +71,10 @@ exports.respondToMatch = async (req, res) => {
                     notification: {
                         title: '매칭 거절됨',
                         body: '상대방이 매칭 요청을 거절했습니다.',
+                    },
+                    data: {
+                        match_id: match_id.toString(), // 필요한 추가 데이터
+                        action: 'reject'
                     }
                 };
                 await sendFirebaseNotification(requester.firebase_token, payload);
@@ -79,5 +87,6 @@ exports.respondToMatch = async (req, res) => {
         res.status(500).json({ error: 'Failed to respond to match request.' });
     }
 };
+
 
 
