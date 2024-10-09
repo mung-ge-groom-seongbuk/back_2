@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
         },
         run_count: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             comment: '달린 횟수'
         },
         recorded_at: {
