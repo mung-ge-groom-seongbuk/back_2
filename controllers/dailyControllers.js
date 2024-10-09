@@ -20,22 +20,45 @@ exports.saveDailyRunData = async (req, res) => {
 
         // 총 거리, 총 달리기 횟수, 최대 페이스, 평균 페이스, 총 소요 시간, 총 소모 칼로리 계산
         const totalDistance = runningData.reduce((acc, record) => acc + record.distance_km, 0);
-        const totalDuration = runningData.reduce((acc, record) => acc + record.duration, 0); // 총 소요 시간
         const totalCalories = runningData.reduce((acc, record) => acc + record.calories, 0); // 총 소모 칼로리
         const totalRuns = runningData.length; // 총 달리기 횟수
-        const maxPace = totalRuns > 0 ? Math.max(...runningData.map(record => record.pace)) : null; // 최대 페이스
-        const avgPace = totalRuns > 0 ? (totalDuration / totalRuns) : null; // 평균 페이스 계산
+
+        let totalDurationInSeconds = 0; // 총 소요 시간 (초 단위)
+        let maxPaceInSeconds = 0; // 최대 페이스 (초 단위)
+        
+        runningData.forEach(record => {
+            const [hours, minutes, seconds] = record.duration.split(':').map(Number);
+            const durationInSeconds = hours * 3600 + minutes * 60 + seconds;
+            totalDurationInSeconds += durationInSeconds;
+
+            // 현재 주행의 페이스 계산 (초당 거리)
+            const paceInSeconds = durationInSeconds / record.distance_km; // 주행 시간(초) / 거리(킬로미터)
+            if (maxPaceInSeconds === 0 || paceInSeconds > maxPaceInSeconds) {
+                maxPaceInSeconds = paceInSeconds; // 최대 페이스 갱신
+            }
+        });
+
+        // 평균 페이스 계산 (초 단위)
+        const avgPaceInSeconds = totalRuns > 0 ? totalDurationInSeconds / totalDistance : null;
+
+        // HH:MM:SS 형식으로 변환하는 함수
+        const formatPace = (paceInSeconds) => {
+            if (paceInSeconds === null) return null;
+            const minutes = Math.floor(paceInSeconds / 60);
+            const seconds = Math.round(paceInSeconds % 60);
+            return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        };
 
         // Daily_Data 테이블에 기록 저장
         const dailyRecord = await DailyData.create({
             user_id: userId,
             date: date,
             total_distance: totalDistance,
-            total_duration: totalDuration,
+            total_duration: new Date(totalDurationInSeconds * 1000).toISOString().substr(11, 8), // HH:MM:SS 형식으로 변환
             total_calories: totalCalories,
             total_run_count: totalRuns, // 총 달린 횟수
-            max_pace: maxPace,
-            avg_pace: avgPace,
+            max_pace: formatPace(maxPaceInSeconds), // 최대 페이스
+            avg_pace: formatPace(avgPaceInSeconds), // 평균 페이스
             created_at: new Date()
         });
 
@@ -56,6 +79,7 @@ exports.getDailySummary = async (req, res) => {
         res.status(500).json({ message: "기록 요약 조회 중 오류 발생.", error });
     }
 };
+
 
 
 
