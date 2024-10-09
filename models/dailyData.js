@@ -1,5 +1,3 @@
-//daily_data table
-
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
@@ -7,19 +5,19 @@ module.exports = (sequelize) => {
         daily_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true, // AUTO_INCREMENT 설정
+            autoIncrement: true,
             allowNull: false
         },
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            references: { // 외래 키 설정
-                model: "user", // 참조할 테이블
-                key: "user_id" // 참조할 테이블의 필드
+            references: {
+                model: "user",
+                key: "user_id"
             }
         },
         date: {
-            type: DataTypes.DATEONLY, // 날짜만 저장
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
         max_pace: {
@@ -31,7 +29,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         total_distance: {
-            type: DataTypes.DECIMAL(5, 2), // 소수점 두 자리까지 허용
+            type: DataTypes.DECIMAL(5, 2),
             allowNull: false
         },
         total_duration: {
@@ -42,15 +40,20 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        total_run_count: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            comment: '하루에 총 달린 횟수'
+        },
         created_at: {
             type: DataTypes.DATE,
             allowNull: false,
-            defaultValue: DataTypes.NOW // 기본값: CURRENT_TIMESTAMP
+            defaultValue: DataTypes.NOW
         }
-    }, 
+    },
     {
-        tableName: "dailyData", // 테이블명 설정
-        timestamps: false // createdAt, updatedAt 자동 생성 방지
+        tableName: "dailyData",
+        timestamps: false
     });
     return DailyData;
 }

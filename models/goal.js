@@ -1,5 +1,3 @@
-//goal table
-
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
@@ -7,15 +5,15 @@ module.exports = (sequelize) => {
         goal_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true, // AUTO_INCREMENT 설정
+            autoIncrement: true,
             allowNull: false
         },
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            references: { // 외래 키 설정
-                model: "user", // 참조할 테이블
-                key: "user_id" // 참조할 테이블의 필드
+            references: {
+                model: "user",
+                key: "user_id"
             }
         },
         goal_name: {
@@ -23,18 +21,28 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         goal_value: {
-            type: DataTypes.DECIMAL(5, 2), // 소수점 두 자리까지 허용
+            type: DataTypes.DECIMAL(5, 2),
             allowNull: false
+        },
+        end_date: {
+            type: DataTypes.DATEONLY,
+            allowNull: false,
+            comment: '목표 종료 날짜'
+        },
+        goal_type: {
+            type: DataTypes.ENUM('distance', 'calories'),
+            allowNull: false,
+            comment: '목표 종류 (거리 또는 칼로리)'
         },
         created_at: {
             type: DataTypes.DATE,
             allowNull: false,
-            defaultValue: DataTypes.NOW // 기본값: CURRENT_TIMESTAMP
+            defaultValue: DataTypes.NOW
         }
     },
     {
-        tableName: "goal", // 테이블명 설정
-        timestamps: false // createdAt, updatedAt 자동 생성 방지
+        tableName: "goal",
+        timestamps: false
     });
     return Goal;
 }

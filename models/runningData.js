@@ -5,17 +5,17 @@ module.exports = (sequelize) => {
         run_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true, // AUTO_INCREMENT 설정
+            autoIncrement: true,
             allowNull: false
         },
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'user',  // 외래키로 user 테이블을 참조
+                model: 'user',
                 key: 'user_id'
             },
-            onDelete: 'CASCADE', // 유저 삭제 시 관련 러닝 데이터도 삭제
+            onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         },
         distance_km: {
@@ -38,19 +38,23 @@ module.exports = (sequelize) => {
             allowNull: false,
             comment: '러닝 중 소모한 칼로리'
         },
+        run_count: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            comment: '달린 횟수'
+        },
         recorded_at: {
             type: DataTypes.DATE,
             allowNull: false,
-            defaultValue: DataTypes.NOW, // 기본값: CURRENT_TIMESTAMP
+            defaultValue: DataTypes.NOW,
             comment: '러닝 기록 일자'
         }
-    }, 
+    },
     {
-        tableName: "runningData", // 테이블명 설정
-        timestamps: false // createdAt, updatedAt 자동 생성 방지
+        tableName: "runningData",
+        timestamps: false
     });
 
-    // RunningData와 User 관계 설정
     RunningData.associate = (models) => {
         RunningData.belongsTo(models.User, { foreignKey: 'user_id' });
     };
