@@ -17,6 +17,7 @@ const matchController = require('./controllers/matchControllers');
 const notificationController = require('./controllers/notificationControllers');
 const chatController = require('./controllers/chatControllers');
 const mapController = require('./controllers/mapControllers');
+const userController = require('./controllers/userControllers');
 const path = require('path');
 
 const app = express();
@@ -113,6 +114,8 @@ app.get('/chat/messages/:sender_id/:receiver_id', chatController.getMessages); /
 
 // 지도 라우트 등록
 app.get('/map', mapController.getMatchedUsersLocation); // 사용자 위치 조회
+
+app.get('/users', userController.getAllUsers); // 모든 유저 정보 조회
 
 // 404 에러 핸들러
 app.use((req, res, next) => {
