@@ -32,6 +32,30 @@ app.use(session({
 }));
 app.use(flash());
 
+// 푸시 알림 테스트 라우트
+app.post('/test-notification', async (req, res) => {
+    const { token } = req.body; // 요청 본문에서 토큰을 가져옴
+
+    if (!token) {
+        return res.status(400).json({ error: '토큰을 제공해야 합니다.' });
+    }
+
+    const payload = {
+        notification: {
+            title: '테스트 알림',
+            body: '푸시 알림이 성공적으로 전송되었습니다!',
+        },
+    };
+
+    try {
+        await sendFirebaseNotification(token, payload);
+        res.status(200).json({ message: '푸시 알림이 성공적으로 전송되었습니다.' });
+    } catch (error) {
+        console.error('푸시 알림 전송 오류:', error);
+        res.status(500).json({ error: '푸시 알림 전송에 실패했습니다.' });
+    }
+});
+
 // multer 설정
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -95,6 +119,11 @@ app.get('/chat/messages/:sender_id/:receiver_id', chatController.getMessages); /
 
 // 지도 라우트 등록
 app.get('/map', mapController.getMatchedUsersLocation); // 사용자 위치 조회
+
+// main.js 파일에 아래 코드를 추가
+
+
+
 
 // 404 에러 핸들러
 app.use((req, res, next) => {
