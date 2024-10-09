@@ -49,17 +49,9 @@ exports.respondToMatch = async (req, res) => {
 
             // 매칭 수락 시 푸시 알림 전송
             if (requester && requester.firebase_token) {
-                const payload = {
-                    notification: {
-                        title: '매칭 수락됨',
-                        body: '상대방이 매칭 요청을 수락했습니다.',
-                    },
-                    data: {
-                        match_id: match_id.toString(), // 필요한 추가 데이터
-                        action: 'accept'
-                    }
-                };
-                await sendFirebaseNotification(requester.firebase_token, payload);
+                const title = '매칭 수락됨';
+                const body = '상대방이 매칭 요청을 수락했습니다.';
+                await sendFirebaseNotification(requester.firebase_token, title, body);
             }
         } else if (action === 'reject') {
             await Matching.update({ status: 'rejected' }, { where: { match_id } });
@@ -67,17 +59,9 @@ exports.respondToMatch = async (req, res) => {
 
             // 매칭 거절 시 푸시 알림 전송
             if (requester && requester.firebase_token) {
-                const payload = {
-                    notification: {
-                        title: '매칭 거절됨',
-                        body: '상대방이 매칭 요청을 거절했습니다.',
-                    },
-                    data: {
-                        match_id: match_id.toString(), // 필요한 추가 데이터
-                        action: 'reject'
-                    }
-                };
-                await sendFirebaseNotification(requester.firebase_token, payload);
+                const title = '매칭 거절됨';
+                const body = '상대방이 매칭 요청을 거절했습니다.';
+                await sendFirebaseNotification(requester.firebase_token, title, body);
             }
         } else {
             res.status(400).json({ error: 'Invalid action.' });
@@ -87,6 +71,7 @@ exports.respondToMatch = async (req, res) => {
         res.status(500).json({ error: 'Failed to respond to match request.' });
     }
 };
+
 
 
 
