@@ -1,5 +1,6 @@
 require('dotenv').config({ path: './.env' });
 
+const { sendFirebaseNotification } = require('./config/firebase'); // firebaseAdmin 대신 sendFirebaseNotification 가져오기
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -8,7 +9,7 @@ const multer = require('multer');
 const http = require('http');
 const socketIo = require('socket.io');
 const db = require('./models/index');
-const firebaseAdmin = require('./config/firebase'); // Firebase 설정 파일 불러오기
+//const firebaseAdmin = require('./config/firebase'); 
 const signInController = require('./controllers/signinControllers');
 const loginoutController = require('./controllers/loginoutControllers');
 const nicknameController = require('./controllers/nicknameControllers');
@@ -58,13 +59,14 @@ app.post('/test-notification', async (req, res) => {
     };
 
     try {
-        await sendFirebaseNotification(token, payload);
+        await sendFirebaseNotification(token, payload); // 수정된 부분
         res.status(200).json({ message: '푸시 알림이 성공적으로 전송되었습니다.' });
     } catch (error) {
         console.error('푸시 알림 전송 오류:', error);
         res.status(500).json({ error: '푸시 알림 전송에 실패했습니다.' });
     }
 });
+
 
 // multer 설정
 const storage = multer.diskStorage({
