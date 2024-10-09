@@ -10,21 +10,22 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
 });
 
-const sendFirebaseNotification = async (registrationToken, payload) => {
+const sendFirebaseNotification = async (registrationToken, title, body) => {
+    const payload = {
+        notification: {
+            title: title,
+            body: body,
+        },
+    };
+
     try {
-        // V1 API 사용
-        const response = await admin.messaging().send({
-            token: registrationToken,
-            notification: {
-                title: payload.notification.title,
-                body: payload.notification.body,
-            },
-        });
+        const response = await admin.messaging().send(registrationToken, payload);
         console.log('Notification sent successfully:', response);
     } catch (error) {
         console.error('Error sending notification:', error);
     }
 };
+
 
 module.exports = { sendFirebaseNotification };
 
