@@ -42,6 +42,10 @@ module.exports = (sequelize) => {
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue: DataTypes.NOW // 기본값: CURRENT_TIMESTAMP
+        },
+        token: {
+            type: DataTypes.STRING, // JWT 토큰 필드
+            allowNull: true,
         }
     }, 
     {
@@ -64,4 +68,5 @@ module.exports = (sequelize) => {
 
     return User;
 };
+
 

@@ -1,5 +1,6 @@
 const { User, Matching, RunningData, UserLocation, Sequelize } = require('../models');
 const { Op } = require('sequelize');
+const { sendFirebaseNotification } = require('../config/firebase'); // Firebase 푸시 알림 함수
 
 // 반경 3km 이내 사용자 목록
 exports.getNearbyUsers = async (req, res) => {
@@ -47,8 +48,7 @@ exports.getNearbyUsers = async (req, res) => {
 
 // 매칭 요청 보내기
 exports.sendMatchRequest = async (req, res) => {
-    // 세션에서 사용자 정보 확인
-    const user = req.session.user; // 세션에서 사용자 정보를 가져옵니다.
+    const user = req.session.user; // 세션에서 사용자 정보를 가져옴
 
     if (!user) {
         return res.status(401).json({ error: '로그인이 필요합니다.' });
@@ -70,6 +70,18 @@ exports.sendMatchRequest = async (req, res) => {
             status: 'requested' // 상태 값을 'requested'로 설정
         });
 
+        // 상대방에게 푸시 알림 보내기
+        const responder = await User.findByPk(responder_id);
+        if (responder && responder.firebase_token) { // 상대방의 Firebase 토큰이 존재할 경우
+            const payload = {
+                notification: {
+                    title: '새로운 매칭 요청',
+                    body: `${user.nickname} 님이 매칭을 요청했습니다.`,
+                }
+            };
+            await sendFirebaseNotification(responder.firebase_token, payload); // 알림 전송
+        }
+
         res.status(200).json({ message: '매칭 요청이 전송되었습니다.', match: newMatch });
     } catch (err) {
         console.error(err);
@@ -77,12 +89,11 @@ exports.sendMatchRequest = async (req, res) => {
     }
 };
 
-
 // 받은 매칭 요청 목록 가져오기
 exports.getMatchRequests = async (req, res) => {
     try {
         const matchRequests = await Matching.findAll({
-            where: { responder_id: req.user.user_id, status: 'requested' }, // 상태를 'requested'로 필터링
+            where: { responder_id: req.user.user_id, status: 'requested' },
             include: [
                 {
                     model: User,
@@ -112,5 +123,7 @@ exports.acceptMatch = async (req, res) => {
         res.status(500).json({ error: '매칭 요청 수락에 실패했습니다.' });
     }
 };
+
+
 
 

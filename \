@@ -1,0 +1,6 @@
+DB_NAME=gooroom_db
+DB_USER=gg
+DB_PASSWORD=password!
+DB_HOST=34.22.67.61
+DB_PORT=3306
+SESSION_SECRET=secretkey123

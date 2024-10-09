@@ -1,0 +1,588 @@
+[33mcommit 8f7bafe1fd40b4b6d0899e14a56c06533f2892b8[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 9 15:41:41 2024 +0900
+
+    fix
+
+[33mcommit f5d7d9aaa16cfae68c4e22b705aaa7efe9b19da6[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 9 01:36:30 2024 +0900
+
+    fix
+
+[33mcommit 27dec2aab79c2bb81b09c54549137e6687d4eff5[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 9 01:32:31 2024 +0900
+
+    fix
+
+[33mcommit eb544a6a62b77e0ffc5d1b46edaf36644607bbd6[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 9 01:27:52 2024 +0900
+
+     fix
+
+[33mcommit 93d78ab2b611e33cb149fd6525035b79fbf817c8[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 9 01:25:37 2024 +0900
+
+    fix
+
+[33mcommit dd25d1439422c522c6df6b8007e606a996340fd7[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 9 00:58:16 2024 +0900
+
+    fix
+
+[33mcommit f4906e545b3457a91982eac6617c1101f59634a1[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 9 00:44:49 2024 +0900
+
+    fix
+
+[33mcommit 3b2ab5b2a9ed2a0f22af93ab75cbaf5ac7eea0bb[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 9 00:40:18 2024 +0900
+
+    fix
+
+[33mcommit f9a045d8fc389f1dc96f08f9192610f03109b414[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 9 00:31:03 2024 +0900
+
+    fix
+
+[33mcommit 077e2756809f9f937cce75a878dfd8e7f61c54a2[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 17:19:56 2024 +0900
+
+    fix
+
+[33mcommit d6551e5eed0e5577d6b4b6e058ca65cfbf31bec0[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 17:15:00 2024 +0900
+
+    fix
+
+[33mcommit 256dc27a71639d3b1256fd533bff715c60b063ba[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 17:13:54 2024 +0900
+
+    fix
+
+[33mcommit bda0091ea9c6d7a0d8be130c4b111c2385276803[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 16:57:27 2024 +0900
+
+    fix
+
+[33mcommit ef1d886d669c0e9d423438c96f7651645cf01d94[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 16:53:29 2024 +0900
+
+    fix
+
+[33mcommit e253e66bbd8aec4142a096d612b04d833bbf2f91[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 16:52:17 2024 +0900
+
+    ㄴㅇㄴㅇㄴ
+
+[33mcommit 01a68732e3c4a3556868e7394f7bc28fbdcf21b9[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 16:46:58 2024 +0900
+
+    fx
+
+[33mcommit 15159425ad946de92010ef24af2f0914eacb1618[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 16:37:41 2024 +0900
+
+    fix
+
+[33mcommit 843d19f8b3fc5f8ed866159633ee62746773cfbd[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 16:23:57 2024 +0900
+
+    f
+
+[33mcommit 0617b5464ad5a8232ab91c9a6f2747b6939601f5[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 16:12:09 2024 +0900
+
+    fix
+
+[33mcommit 2e365d77f770b4f5860abd5c0dced3e8d320f2eb[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 16:02:32 2024 +0900
+
+    fix : 사용자목록user_id로 구분
+
+[33mcommit 96933d20b4d5267a8f34f0675755f94dff9273ee[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 15:36:41 2024 +0900
+
+    fix : 메세지 추가
+
+[33mcommit 41c28fa932f05e1e7c32bb5fb37d9156b3c27929[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 14:37:11 2024 +0900
+
+    fix
+
+[33mcommit 9ec70eee92ef28a8672bc1cd86c85047f904991e[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 14:35:21 2024 +0900
+
+    fix : routes
+
+[33mcommit cf0c8fb740c793b561a5709e5ebea4cd56172ec1[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 8 14:17:21 2024 +0900
+
+    test
+
+[33mcommit 277bf753fd680f3db934772f705829e9b1b1d778[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Sun Oct 6 20:49:38 2024 +0900
+
+    fd
+
+[33mcommit 91a36160dcedfd1f73fc4ea7cb60a60bb5928b07[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Sun Oct 6 20:46:55 2024 +0900
+
+    fix
+
+[33mcommit e85261a8132a8c920b2a62bbcbecfb99e778590f[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Sun Oct 6 20:43:16 2024 +0900
+
+    fix
+
+[33mcommit 81a913eafa416f4a71939cfe700e2382e84d556e[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Sun Oct 6 20:39:56 2024 +0900
+
+    fix
+
+[33mcommit f0e6ae209d07b10f9db41196551396403e87d1a3[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Sun Oct 6 20:35:54 2024 +0900
+
+    fix
+
+[33mcommit 3d505facbf885f6902e6c4eac9ad978b903a61f7[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Sun Oct 6 20:34:26 2024 +0900
+
+    fix
+
+[33mcommit 84229d1f87202a6685f48c77aa15acb55ea966a5[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Sun Oct 6 20:31:59 2024 +0900
+
+    fix
+
+[33mcommit 085b5c080d95a7c7e3decf828cea9fe3db4a873c[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Sun Oct 6 20:26:15 2024 +0900
+
+    fix
+
+[33mcommit dc8b59c83e3f7ac40e713a520d3d7104856b9d13[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 19:14:16 2024 +0900
+
+    fix 해싱
+
+[33mcommit f050c5f006914565538e6b78b254102fdf038df7[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 19:02:46 2024 +0900
+
+    fix
+
+[33mcommit 23baac42a75b7fc44e11a7ea14df022587b8f278[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 19:00:39 2024 +0900
+
+    fix
+
+[33mcommit 13887a4cae18843b0201c7c4cc2fe1d9efc5867d[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 18:57:36 2024 +0900
+
+    tkrwp
+
+[33mcommit de74489ca6b5ad8065d5ee7afc9300331b93e618[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 18:56:39 2024 +0900
+
+    fe
+
+[33mcommit a7f96256c02f8e12357aaa127835aa0c39ffa693[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 18:49:03 2024 +0900
+
+    fix
+
+[33mcommit 4caaaf7756e63f48f3b737eb408013ebf20e0459[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 18:28:15 2024 +0900
+
+    fix 80
+
+[33mcommit ceb33bd1dfe8866ca93620ff7833c441669853fd[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 18:25:06 2024 +0900
+
+    fix
+
+[33mcommit 8724593e6b942a36925b532d76054595536c68e5[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 17:54:49 2024 +0900
+
+    default value
+
+[33mcommit 8448fd857e6be9fb1f92cd05257840b635a322fb[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 17:48:13 2024 +0900
+
+    fix :
+
+[33mcommit 8cf93d3ce760d7380ff421d76875bd2f9119e8d5[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 17:38:40 2024 +0900
+
+    fix
+
+[33mcommit 5ee5be3c6beaf50f04aab70d266b0705cd259aa1[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 17:29:24 2024 +0900
+
+    ㄹㄷㅁㅅ
+
+[33mcommit 1176e56a0ee04cebfb4707dbea6f9dc2667ab2af[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 17:12:02 2024 +0900
+
+    feat :
+
+[33mcommit a28b98cf239dffe2f1acdad6aca5454bb7998ec9[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 16:53:08 2024 +0900
+
+    feat : 프로필 사진, 닉네임
+
+[33mcommit 083990c0f776ce76395314519908eaedf1293b34[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 16:28:30 2024 +0900
+
+    fix : 포트 80
+
+[33mcommit c86187533754058e04ebc866b5536dff6298ccb0[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 16:25:27 2024 +0900
+
+    fix : 경로수정
+
+[33mcommit 6284b9f5b5b8519f1cebe0408640ffa3a565585d[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 16:12:39 2024 +0900
+
+    fix
+
+[33mcommit 2be1291b4710a0bacf4d0f20b8e9b7768240c326[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 16:07:19 2024 +0900
+
+    fix
+
+[33mcommit e349d616687169b4151afe4110ff3390ad33ee8a[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 16:02:03 2024 +0900
+
+    fix
+
+[33mcommit 46bfc18c5de3d9f506dcbe06a8e9ef0a3e6b965c[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:59:01 2024 +0900
+
+    feat 로그인
+
+[33mcommit da5be448f4f034bcb8e3425fe2b955c3748b424e[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:46:22 2024 +0900
+
+    fix
+
+[33mcommit f66caf9d3e9cc8d5cd481bb5223aced5dbac3e9e[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:41:15 2024 +0900
+
+    fix
+
+[33mcommit a0e9e75bf5c384d6ab3ab427a994ee0ee5cf957e[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:39:26 2024 +0900
+
+    fix ; config
+
+[33mcommit 38357a15a6f594c585d6c556e80f1f8a1569f465[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:35:21 2024 +0900
+
+    fix ; s를 빼먹음
+
+[33mcommit e0700b09a7145b5d62f79a9561f999dde3231cbd[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:33:03 2024 +0900
+
+    feat ; 회원가입 라우트 등록
+
+[33mcommit f1dc36bde559263613d1bb5ced450e4638348e66[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:23:12 2024 +0900
+
+    fix : 80
+
+[33mcommit f6d62e48e4e54ca8f32c62b1ca077ddf2b3bb7fc[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:20:54 2024 +0900
+
+    fix ; 3000
+
+[33mcommit 366598572aeb3eacbb37416f345cd436e6792c4f[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:16:57 2024 +0900
+
+    fix l
+
+[33mcommit 7de2dbe539ada65c2ccb917ba834beeed476952a[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:13:49 2024 +0900
+
+    fix : 80
+
+[33mcommit 65676a5ee8c2aab0e47f8098c1eae0f9a31d1b8b[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:11:04 2024 +0900
+
+    feat
+
+[33mcommit bc5faf2be62889af123cc35b504b194333e823e3[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:09:35 2024 +0900
+
+    feat
+
+[33mcommit 1b3d7df638f3762e187f0f7d5044dcc780bb592a[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:06:57 2024 +0900
+
+    fix :
+
+[33mcommit 03433994cbcb20478412c5bdaa7296b3fe77899f[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 15:02:57 2024 +0900
+
+    feat : server
+
+[33mcommit df40a015bd283b062efde563deb9434ef5ccd650[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 01:55:19 2024 +0900
+
+    feat ;회원가입컨트롤러
+
+[33mcommit c5f60b23a63ca6e5251d680e7e951edbc47338f8[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 01:44:08 2024 +0900
+
+    feat ; 테이블 추가 완료
+
+[33mcommit 17081402dd424f7c1b9c6525935432815221e4b4[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 00:31:10 2024 +0900
+
+    fix ; 일단 원래대로
+
+[33mcommit ff8e5269aa0ba44a8b4b39a4d1ea9f5ae1a3e144[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 00:15:35 2024 +0900
+
+    fix..
+
+[33mcommit ca5f104253bd289c7afa1c5b524f29282353e196[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Wed Oct 2 00:12:07 2024 +0900
+
+    fix
+
+[33mcommit f27d6a203c0c361ce5e15261f84cd1ab04651d6e[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 23:58:30 2024 +0900
+
+    fix ; index수정
+
+[33mcommit e565416002055f7fce08555ea4b9117296b22054[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 22:52:59 2024 +0900
+
+    feat : match table
+
+[33mcommit 30cdc8092aff28a7931c12587277a2c333c64a16[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 15:53:14 2024 +0900
+
+    fix : user 테이블 추기ㅏ
+
+[33mcommit 1032cacc03f8f580f1df91a4641204d9c6a6655c[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 15:18:51 2024 +0900
+
+    feat
+
+[33mcommit b11bb97b3803d454a278f93c175cc14fbcc3ceef[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 14:01:49 2024 +0900
+
+    fix ;main
+
+[33mcommit b74e28b18f8ea8a1a2af4701e86ed25368106928[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 02:57:01 2024 +0900
+
+    fix
+
+[33mcommit 141365e0ef5b187ad54db7084574a944cea4e1b6[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 02:54:49 2024 +0900
+
+    fix
+
+[33mcommit 21d00ce31ec4403899690a19b1879dbc8dd47e32[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 02:46:12 2024 +0900
+
+    fix.......
+
+[33mcommit 48a1bab8c8a6657611b14fa5604dac1bf45f45c8[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 02:31:34 2024 +0900
+
+    fix...
+
+[33mcommit 43c04cd131e0ed77d1b1f48e2dc234259054b635[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 02:29:07 2024 +0900
+
+    fix
+
+[33mcommit 98f93c0240b19e8c703870bba0931c9eb0b43bfd[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 01:48:30 2024 +0900
+
+    fix
+
+[33mcommit 9f4e4f7a2cebbcdfd6e39edfeb84b8e0873da4bb[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 01:37:45 2024 +0900
+
+    feat : main.js
+
+[33mcommit e5ba9c54de631ada0950dfda3bdcff144ade81ee[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 00:58:40 2024 +0900
+
+    fix : console log 추가
+
+[33mcommit e4b073f1cd636f6912930be38af9489a5de017bf[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 00:55:35 2024 +0900
+
+    fix : 오타
+
+[33mcommit d7a21c4ef8f47e9b2ced8b539c920cac656df7e4[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Tue Oct 1 00:29:27 2024 +0900
+
+    feat : user 테이블 임시
+
+[33mcommit 0f93953deef438ea4368eadfc11e7ffbe5c45c59[m
+Author: suyeon <jwp990329@gooroom.asia>
+Date:   Mon Sep 30 14:47:50 2024 +0000
+
+    Remove .env from version control
+
+[33mcommit a47665df7113ea0782395ab0a8c9ee627a655e13[m
+Merge: fe7605e d5c9114
+Author: suyeon <jwp990329@gooroom.asia>
+Date:   Mon Sep 30 14:44:35 2024 +0000
+
+    Resolve merge conflict for .env
+
+[33mcommit fe7605eb2fc6e09dfb9ffcda21b81e6a173165c6[m
+Author: suyeon <jwp990329@gooroom.asia>
+Date:   Mon Sep 30 14:41:00 2024 +0000
+
+    Update .env file
+
+[33mcommit d5c91145b6032681d5fb52778f532cfdcd480efc[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Mon Sep 30 23:38:50 2024 +0900
+
+    feat :sequelize install
+
+[33mcommit 2036d024b8fc31a4cd998ba44c7c144e78c8acf5[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Mon Sep 30 23:24:50 2024 +0900
+
+    fix : env delete
+
+[33mcommit 649f93efc96930398c9de2b3fe9903e5193c8591[m
+Author: suyeon <jwp990329@gooroom.asia>
+Date:   Mon Sep 30 14:22:23 2024 +0000
+
+    Add .env to .gitignore
+
+[33mcommit cf34757c18ec8818803a50baa693445dd702e589[m
+Author: suyeon <jwp990329@gooroom.asia>
+Date:   Sun Sep 29 17:28:37 2024 +0000
+
+    Add .env file
+
+[33mcommit cc5613f5540d297628c83d44c867823fde7f5a5d[m
+Author: suyeon <jwp990329@gooroom.asia>
+Date:   Sun Sep 29 17:19:37 2024 +0000
+
+    Add sequelize configuration and initial files
+
+[33mcommit bf5612bb97a8a93c2e2ebd0b3b2b77b08aedce61[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Mon Sep 30 02:15:14 2024 +0900
+
+    fix : config 삭제
+
+[33mcommit 400259b69805f4d5154ca807555673b12090532d[m
+Author: obongsik <zkfkdzhdo@naver.com>
+Date:   Mon Sep 30 02:07:21 2024 +0900
+
+    feat : 디렉토리 구조 생성
+
+[33mcommit 867027ee952fad96411548e7f01c99da77ae2164[m
+Author: suyeon <jwp990329@gooroom.asia>
+Date:   Sat Sep 28 06:51:37 2024 +0000
+
+    Initial Commit
+
+[33mcommit c5c4e81c425612fc08addeb8ca35a7bd9a99eeb1[m
+Author: suyeon <jwp990329@gooroom.asia>
+Date:   Sat Sep 28 06:40:57 2024 +0000
+
+    Initial commit
+
+[33mcommit 5a76e3dabcbd90e1a6be43b9c12954a69fc79592[m
+Author: obongsik <138201261+obongsik@users.noreply.github.com>
+Date:   Sat Sep 28 15:32:03 2024 +0900
+
+    Initial commit
