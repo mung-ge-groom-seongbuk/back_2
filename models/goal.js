@@ -20,10 +20,6 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING(100),
             allowNull: false
         },
-        goal_value: {
-            type: DataTypes.DECIMAL(5, 2),
-            allowNull: false
-        },
         end_date: {
             type: DataTypes.DATEONLY,
             allowNull: false,
