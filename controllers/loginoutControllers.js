@@ -1,8 +1,8 @@
 const db = require("../models/index");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken'); // JWT 모듈 불러오기
+const config = require('../config/config'); // config 가져오기
 const { User } = require('../models'); // User 모델 불러오기
-const config = require('../config/config'); // secret key 가져오기
 
 // 로그인
 exports.authenticate = async (req, res) => {
@@ -14,7 +14,11 @@ exports.authenticate = async (req, res) => {
         // 사용자가 존재하고 비밀번호가 일치하는지 확인
         if (user && await bcrypt.compare(password, user.password)) {
             // JWT 토큰 생성
-            const token = jwt.sign({ user_id: user.user_id, email: user.email }, config.SESSION_SECRET, { expiresIn: '1h' });
+            const token = jwt.sign(
+                { user_id: user.user_id, email: user.email },
+                config.development.sessionSecret, // 수정된 부분
+                { expiresIn: '1h' }
+            );
 
             // 생성된 토큰을 DB에 저장
             await user.update({ token });
