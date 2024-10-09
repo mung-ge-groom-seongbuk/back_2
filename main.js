@@ -73,11 +73,10 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Firebase Cloud Messaging 사용 예시
 const sendFirebaseNotification = async (registrationToken, payload) => {
     try {
-        const response = await firebaseAdmin.messaging().sendToDevice(registrationToken, payload);
-        console.log('Notification sent successfully:', response);
+        await firebaseAdmin.messaging().sendToDevice(registrationToken, payload);
+        console.log('Notification sent successfully');
     } catch (error) {
         console.error('Error sending notification:', error);
-        throw error; // 오류를 상위로 전달
     }
 };
 
@@ -121,6 +120,11 @@ app.get('/chat/messages/:sender_id/:receiver_id', chatController.getMessages); /
 // 지도 라우트 등록
 app.get('/map', mapController.getMatchedUsersLocation); // 사용자 위치 조회
 
+// main.js 파일에 아래 코드를 추가
+
+
+
+
 // 404 에러 핸들러
 app.use((req, res, next) => {
     res.status(404).send('Not Found');
@@ -135,10 +139,8 @@ app.use((err, req, res, next) => {
 // 서버 시작
 const PORT = process.env.PORT || 80;
 server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(Server is running on port ${PORT});
 });
-
-//tlgja
 
 
 
