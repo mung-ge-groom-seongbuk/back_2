@@ -41,6 +41,7 @@ module.exports = (sequelize) => {
         run_count: {
             type: DataTypes.INTEGER,
             allowNull: true,
+            defaultValue: 0, // 기본값 설정
             comment: '달린 횟수'
         },
         recorded_at: {
