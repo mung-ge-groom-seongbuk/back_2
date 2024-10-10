@@ -45,7 +45,7 @@ app.use(flash());
 
 
 // 푸시 알림 테스트 라우트
-app.post('/test-notification', async (req, res) => {
+/*app.post('/test-notification', async (req, res) => {
     const { token } = req.body; // 요청 본문에서 토큰을 가져옴
 
     if (!token) {
@@ -57,7 +57,7 @@ app.post('/test-notification', async (req, res) => {
             title: '테스트 알림',
             body: '푸시 알림이 성공적으로 전송되었습니다!',
         },
-    };
+    
 
     try {
         await sendFirebaseNotification(token, payload); // 수정된 부분
@@ -66,7 +66,7 @@ app.post('/test-notification', async (req, res) => {
         console.error('푸시 알림 전송 오류:', error);
         res.status(500).json({ error: '푸시 알림 전송에 실패했습니다.' });
     }
-});
+});*/
 
 
 
