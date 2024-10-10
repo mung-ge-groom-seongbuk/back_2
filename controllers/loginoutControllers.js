@@ -1,9 +1,8 @@
 const db = require("../models/index");
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken'); // JWT 모듈 불러오기
-const config = require('../config/config'); // config 가져오기
-const { User } = require('../models'); // User 모델 불러오기
-const { UserLocation } = require('../models/userLocation'); // UserLocation 모델 가져오기
+const jwt = require('jsonwebtoken');
+const config = require('../config/config');
+const { User, UserLocation } = db; // User와 UserLocation 모델 모두 가져오기
 
 // 로그인
 exports.authenticate = async (req, res) => {
@@ -45,7 +44,6 @@ exports.authenticate = async (req, res) => {
     }
 };
 
-
 // 로그아웃
 exports.logout = (req, res) => {
     req.session.destroy((err) => {
@@ -65,6 +63,7 @@ exports.redirectView = (req, res) => {
         res.status(500).send('리다이렉트 경로가 설정되지 않았습니다.');
     }
 };
+
 
 
 
