@@ -1,6 +1,7 @@
 //지도 관련 기능.. 사용자 위치 표시, 마커 클릭 시 프로필 보이고 매칭 요청..
 
 const { UserLocation, User, RunningData, Matching, Sequelize } = require('../models');
+const { Op } = require("sequelize"); // Op 객체 불러오기
 
 // 매칭된 사용자 위치 가져오기
 exports.getMatchedUsersLocation = async (req, res) => {
