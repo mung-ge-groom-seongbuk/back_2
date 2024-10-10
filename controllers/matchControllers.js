@@ -50,9 +50,7 @@ exports.getNearbyUsers = async (req, res) => {
 exports.sendMatchRequest = async (req, res) => {
     const user = req.session.user; // 세션에서 사용자 정보를 가져옴
 
-    if (!user) {
-        return res.status(401).json({ error: '로그인이 필요합니다.' });
-    }
+  
 
     try {
         const { responder_id, message } = req.body;
