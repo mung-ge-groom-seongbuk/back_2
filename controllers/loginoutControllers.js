@@ -33,6 +33,12 @@ exports.authenticate = async (req, res) => {
             // 세션에 user_id 저장
             req.session.user_id = user.user_id;
 
+            res.cookie('auth_token', token, {
+                httpOnly: true, // JavaScript로 쿠키 접근 불가 (보안 강화)
+                secure: false, // HTTPS에서만 쿠키 전송 (개발 시에는 false로 설정)
+                maxAge: 60 * 60 * 1000 // 쿠키 만료 시간 (1시간)
+            });
+
             // 응답으로 토큰 전송
             return res.status(200).json({ message: "로그인 성공!", token, redirectUrl: '/dashboard' });
         } else {
