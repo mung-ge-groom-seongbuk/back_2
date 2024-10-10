@@ -6,7 +6,7 @@ const { User } = require('../models'); // User 모델 불러오기
 
 // 로그인
 exports.authenticate = async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, latitude, longitude } = req.body; // 위치 정보 추가
     try {
         // 이메일로 사용자 조회
         const user = await User.findOne({ where: { email: email } });
@@ -16,15 +16,22 @@ exports.authenticate = async (req, res) => {
             // JWT 토큰 생성
             const token = jwt.sign(
                 { user_id: user.user_id, email: user.email },
-                config.development.sessionSecret, // 세션 비밀키
+                config.development.sessionSecret,
                 { expiresIn: '1h' }
             );
 
             // 생성된 토큰을 DB에 저장
             await user.update({ token });
 
+            // 사용자의 위치 정보를 UserLocation 테이블에 저장
+            await UserLocation.upsert({
+                user_id: user.user_id,
+                latitude: latitude,
+                longitude: longitude
+            });
+
             // 세션에 user_id 저장
-            req.session.user_id = user.user_id; // 세션에 user_id 저장
+            req.session.user_id = user.user_id;
 
             // 응답으로 토큰 전송
             return res.status(200).json({ message: "로그인 성공!", token, redirectUrl: '/dashboard' });
@@ -36,6 +43,7 @@ exports.authenticate = async (req, res) => {
         return res.status(500).send('서버 내부 오류');
     }
 };
+
 
 // 로그아웃
 exports.logout = (req, res) => {
