@@ -63,3 +63,4 @@ exports.getMatchedUsersLocation = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch matched users location.', details: err.message }); // 에러 메시지 추가
     }
 };
+

@@ -1,4 +1,4 @@
-const { Matching, User } = require('../models');
+const { Matching, User, UserLocation } = require('../models');
 const sendFirebaseNotification = require('../config/firebase').sendFirebaseNotification; // Firebase 푸시 알림 함수
 
 // 매칭 알림 확인 (매칭 요청 받은 경우)
@@ -34,7 +34,7 @@ exports.getMatchNotifications = async (req, res) => {
 // 매칭 요청 수락 또는 거절
 exports.respondToMatch = async (req, res) => {
     try {
-        const { match_id, action } = req.body;
+        const { match_id, action, latitude, longitude } = req.body; // 위치 정보 추가
         const match = await Matching.findByPk(match_id);
 
         if (!match) {
@@ -44,6 +44,13 @@ exports.respondToMatch = async (req, res) => {
         const requester = await User.findByPk(match.requester_id);
 
         if (action === 'accept') {
+            // 매칭 수락 시 위치 정보 저장
+            await UserLocation.upsert({
+                user_id: req.session.user_id, // 수락한 사용자 ID
+                latitude: latitude,
+                longitude: longitude
+            });
+
             await Matching.update({ status: 'accepted' }, { where: { match_id } });
             res.status(200).json({ message: 'Match accepted.' });
 
@@ -71,7 +78,6 @@ exports.respondToMatch = async (req, res) => {
         res.status(500).json({ error: 'Failed to respond to match request.' });
     }
 };
-
 
 
 
