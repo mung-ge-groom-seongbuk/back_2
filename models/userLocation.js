@@ -30,5 +30,10 @@ module.exports = (sequelize) => {
         tableName: "userLocation", // 테이블명 설정
         timestamps: false // createdAt, updatedAt 자동 생성 방지
     });
+
+    // UserLocation 모델
+    UserLocation.associate = (models) => {
+        UserLocation.belongsTo(models.User, { foreignKey: 'user_id' });
+};
     return UserLocation;
 }

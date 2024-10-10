@@ -1,4 +1,4 @@
-const { Matching, User, UserLocation } = require('../models');
+const { Matching, User } = require('../models');
 const sendFirebaseNotification = require('../config/firebase').sendFirebaseNotification; // Firebase 푸시 알림 함수
 
 // 매칭 알림 확인 (매칭 요청 받은 경우)

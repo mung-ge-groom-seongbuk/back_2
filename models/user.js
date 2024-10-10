@@ -63,6 +63,8 @@ module.exports = (sequelize) => {
         User.hasOne(models.Notification, { foreignKey: 'user_id' });
         User.hasMany(models.Chat, { foreignKey: 'sender_id' });
         User.hasMany(models.Chat, { foreignKey: 'receiver_id' });
+
+
     };
 
     return User;
