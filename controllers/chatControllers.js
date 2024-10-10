@@ -2,7 +2,7 @@ const { Chat, Matching } = require('../models');
 
 // 채팅 메시지 전송
 exports.sendMessage = async (req, res) => {
-    const user = req.user; // 세션에서 사용자 정보를 가져옴
+    const user = req.session.user; // 세션에서 사용자 정보를 가져옴
 
     if (!user) {
         return res.status(401).json({ error: '로그인이 필요합니다.' });
