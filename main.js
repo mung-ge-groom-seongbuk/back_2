@@ -11,6 +11,7 @@ const socketIo = require('socket.io');
 const db = require('./models/index');
 const { sendMatchRequest } = require('./controllers/matchControllers'); // 매칭 요청 처리 함수 가져오기
 const authenticateJWT = require('./middleware/authenticateJWT'); // JWT 인증 미들웨어 가져오기
+const { getMatchedUsersLocation } = require('./controllers/mapControllers');
 
 //const firebaseAdmin = require('./config/firebase'); 
 const signInController = require('./controllers/signinControllers');
@@ -123,7 +124,10 @@ app.post('/chat/send', chatController.sendMessage); // 메시지 전송
 app.get('/chat/messages/:sender_id/:receiver_id', chatController.getMessages); // 메시지 조회
 
 // 지도 라우트 등록
-app.get('/map', mapController.getMatchedUsersLocation); // 사용자 위치 조회
+//app.get('/map', mapController.getMatchedUsersLocation); // 사용자 위치 조회
+// 지도 라우트 등록
+app.get('/matched-users-location', authenticateJWT, mapController.getMatchedUsersLocation); // 사용자 위치 조회
+
 
 // DailyData 관련 라우트 등록
 app.post('/daily/runs', dailyController.saveDailyRunData); // 하루의 달리기 기록 저장
