@@ -26,7 +26,7 @@ const runController = require('./controllers/runControllers');
 const dailyController = require('./controllers/dailyControllers');
 const goalController = require('./controllers/goalControllers');
 const runprofileController = require('./controllers/runprofileControllers');
-const userLocationController = require('./controllers/userLocationControllers');
+//const userLocationController = require('./controllers/userLocationControllers');
 const path = require('path');
 
 const app = express();
