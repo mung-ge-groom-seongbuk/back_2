@@ -10,7 +10,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const db = require('./models/index');
 const { sendMatchRequest } = require('./controllers/matchControllers'); // 매칭 요청 처리 함수 가져오기
-const authenticateJWT = require('./middlewares/authenticateJWT'); // JWT 인증 미들웨어 가져오기
+const authenticateJWT = require('./middleware/authenticateJWT'); // JWT 인증 미들웨어 가져오기
 
 //const firebaseAdmin = require('./config/firebase'); 
 const signInController = require('./controllers/signinControllers');
