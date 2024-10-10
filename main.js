@@ -124,9 +124,9 @@ app.post('/chat/send', chatController.sendMessage); // 메시지 전송
 app.get('/chat/messages/:sender_id/:receiver_id', chatController.getMessages); // 메시지 조회
 
 // 지도 라우트 등록
-//app.get('/map', mapController.getMatchedUsersLocation); // 사용자 위치 조회
+app.get('/map', mapController.getMatchedUsersLocation); // 사용자 위치 조회
 // 지도 라우트 등록
-app.get('/matched-users-location', authenticateJWT, mapController.getMatchedUsersLocation); // 사용자 위치 조회
+//app.get('/matched-users-location', authenticateJWT, mapController.getMatchedUsersLocation); // 사용자 위치 조회
 
 
 // DailyData 관련 라우트 등록
@@ -145,7 +145,7 @@ app.get('/goals/:userId', goalController.getGoals); // 사용자 목표 조회
 app.get('/profile/:userId', runprofileController.getUserProfile); // 사용자 프로필 조회
 
 // 사용자 위치 라우트 등록
-app.post('/user/location/update', userLocationController.updateUserLocation); // 사용자 위치 업데이트
+//app.post('/user/location/update', userLocationController.updateUserLocation); // 사용자 위치 업데이트
 
 
 app.get('/users', userController.getAllUsers); // 모든 유저 정보 조회

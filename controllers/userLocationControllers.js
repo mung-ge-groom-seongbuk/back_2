@@ -1,6 +1,6 @@
 //나의 위치 업데이트
 
-const { UserLocation } = require('../models');
+/*const { UserLocation } = require('../models');
 
 // 사용자 위치 정보 업데이트
 exports.updateUserLocation = async (req, res) => {
@@ -25,5 +25,5 @@ exports.updateUserLocation = async (req, res) => {
         console.error(error);
         return res.status(500).json({ error: '위치 정보 업데이트에 실패했습니다.' });
     }
-};
+};*/
 
