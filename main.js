@@ -11,6 +11,7 @@ const socketIo = require('socket.io');
 const db = require('./models/index');
 const { sendMatchRequest } = require('./controllers/matchControllers'); // 매칭 요청 처리 함수 가져오기
 const authenticateJWT = require('./middleware/authenticateJWT'); // JWT 인증 미들웨어 가져오기
+const { getMatchedUsersLocation } = require('./controllers/mapControllers');
 
 const signInController = require('./controllers/signinControllers');
 const loginoutController = require('./controllers/loginoutControllers');
@@ -18,7 +19,7 @@ const nicknameController = require('./controllers/nicknameControllers');
 const matchController = require('./controllers/matchControllers');
 const notificationController = require('./controllers/notificationControllers');
 const chatController = require('./controllers/chatControllers');
-const mapController = require('./controllers/mapControllers');
+//const mapController = require('./controllers/mapControllers');
 const userController = require('./controllers/userControllers');
 const runController = require('./controllers/runControllers');
 const dailyController = require('./controllers/dailyControllers');
@@ -92,7 +93,7 @@ app.post('/chat/send', chatController.sendMessage); // 메시지 전송
 app.get('/chat/messages/:sender_id/:receiver_id', chatController.getMessages); // 메시지 조회
 
 // 지도 라우트 등록
-app.get('/matched-users-location', authenticateJWT, mapController.getMatchedUsersLocation); // 사용자 위치 조회
+app.get('/matched-users-location', authenticateJWT, getMatchedUsersLocation); // 사용자 위치 조회
 
 // DailyData 관련 라우트 등록
 app.post('/daily/runs', dailyController.saveDailyRunData); // 하루의 달리기 기록 저장
