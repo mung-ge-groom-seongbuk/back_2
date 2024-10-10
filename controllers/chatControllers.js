@@ -1,4 +1,4 @@
-const { Chat, User } = require('../models'); // Chat과 User 모델을 가져옵니다.
+const { Chat, User } = require('../models'); // Chat과 User 모델을 가져옴
 const { Op } = require("sequelize");
 
 exports.sendMessage = async (req, res) => {
