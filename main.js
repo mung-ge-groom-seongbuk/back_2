@@ -11,9 +11,7 @@ const socketIo = require('socket.io');
 const db = require('./models/index');
 const { sendMatchRequest } = require('./controllers/matchControllers'); // 매칭 요청 처리 함수 가져오기
 const authenticateJWT = require('./middleware/authenticateJWT'); // JWT 인증 미들웨어 가져오기
-//const { getMatchedUsersLocation } = require('./controllers/mapControllers');
 
-//const firebaseAdmin = require('./config/firebase'); 
 const signInController = require('./controllers/signinControllers');
 const loginoutController = require('./controllers/loginoutControllers');
 const nicknameController = require('./controllers/nicknameControllers');
@@ -26,7 +24,6 @@ const runController = require('./controllers/runControllers');
 const dailyController = require('./controllers/dailyControllers');
 const goalController = require('./controllers/goalControllers');
 const runprofileController = require('./controllers/runprofileControllers');
-//const userLocationController = require('./controllers/userLocationControllers');
 const path = require('path');
 
 const app = express();
@@ -42,34 +39,6 @@ app.use(session({
     saveUninitialized: false // 세션이 새로 생성되었을 때만 저장
 }));
 app.use(flash());
-
-
-
-// 푸시 알림 테스트 라우트
-/*app.post('/test-notification', async (req, res) => {
-    const { token } = req.body; // 요청 본문에서 토큰을 가져옴
-
-    if (!token) {
-        return res.status(400).json({ error: '토큰을 제공해야 합니다.' });
-    }
-
-    const payload = {
-        notification: {
-            title: '테스트 알림',
-            body: '푸시 알림이 성공적으로 전송되었습니다!',
-        },
-    
-
-    try {
-        await sendFirebaseNotification(token, payload); // 수정된 부분
-        res.status(200).json({ message: '푸시 알림이 성공적으로 전송되었습니다.' });
-    } catch (error) {
-        console.error('푸시 알림 전송 오류:', error);
-        res.status(500).json({ error: '푸시 알림 전송에 실패했습니다.' });
-    }
-});*/
-
-
 
 // multer 설정
 const storage = multer.diskStorage({
@@ -112,7 +81,6 @@ app.post('/updateProfile', upload.single('profile_picture'), nicknameController.
 
 // 매칭 라우트 등록
 app.get('/matches', matchController.getNearbyUsers); // 사용자 목록 조회
-// 매칭 요청 API 경로
 app.post('/matching-request', authenticateJWT, sendMatchRequest); //매칭 요청 전송
 
 // 알림 라우트 등록
@@ -124,10 +92,7 @@ app.post('/chat/send', chatController.sendMessage); // 메시지 전송
 app.get('/chat/messages/:sender_id/:receiver_id', chatController.getMessages); // 메시지 조회
 
 // 지도 라우트 등록
-//app.get('/map', mapController.getMatchedUsersLocation); // 사용자 위치 조회
-// 지도 라우트 등록
 app.get('/matched-users-location', authenticateJWT, mapController.getMatchedUsersLocation); // 사용자 위치 조회
-
 
 // DailyData 관련 라우트 등록
 app.post('/daily/runs', dailyController.saveDailyRunData); // 하루의 달리기 기록 저장
@@ -143,10 +108,6 @@ app.get('/goals/:userId', goalController.getGoals); // 사용자 목표 조회
 
 // 사용자 프로필 조회 라우트 등록
 app.get('/profile/:userId', runprofileController.getUserProfile); // 사용자 프로필 조회
-
-// 사용자 위치 라우트 등록
-//app.post('/user/location/update', userLocationController.updateUserLocation); // 사용자 위치 업데이트
-
 
 app.get('/users', userController.getAllUsers); // 모든 유저 정보 조회
 
@@ -166,6 +127,7 @@ const PORT = process.env.PORT || 80;
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
 
 
 
