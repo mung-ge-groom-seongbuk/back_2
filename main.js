@@ -9,6 +9,9 @@ const multer = require('multer');
 const http = require('http');
 const socketIo = require('socket.io');
 const db = require('./models/index');
+const { sendMatchRequest } = require('./controllers/matchingController'); // 매칭 요청 처리 함수 가져오기
+const authenticateJWT = require('./middlewares/authenticateJWT'); // JWT 인증 미들웨어 가져오기
+
 //const firebaseAdmin = require('./config/firebase'); 
 const signInController = require('./controllers/signinControllers');
 const loginoutController = require('./controllers/loginoutControllers');
@@ -66,6 +69,7 @@ app.post('/test-notification', async (req, res) => {
 });
 
 
+
 // multer 설정
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -108,6 +112,8 @@ app.post('/updateProfile', upload.single('profile_picture'), nicknameController.
 // 매칭 라우트 등록
 app.get('/matches', matchController.getNearbyUsers); // 사용자 목록 조회
 app.post('/matches/send', matchController.sendMatchRequest); // 매칭 요청 전송
+// 매칭 요청 API 경로
+app.post('/matching-request', authenticateJWT, sendMatchRequest);
 
 // 알림 라우트 등록
 app.get('/notifications', notificationController.getMatchNotifications); // 매칭 알림 확인

@@ -57,6 +57,11 @@ exports.sendMatchRequest = async (req, res) => {
     try {
         const { responder_id, message } = req.body;
 
+        // 요청 본문에서 ID가 없으면 오류 응답
+        if (!responder_id) {
+            return res.status(400).json({ error: '응답자의 ID를 제공해야 합니다.' });
+        }
+
         // 메시지 길이 검증
         if (message && message.length > 500) {
             return res.status(400).json({ error: '메시지는 500자 이하이어야 합니다.' });
@@ -88,9 +93,3 @@ exports.sendMatchRequest = async (req, res) => {
         res.status(500).json({ error: '매칭 요청 전송에 실패했습니다.' });
     }
 };
-
-
-
-
-
-
