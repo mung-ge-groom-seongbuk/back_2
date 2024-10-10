@@ -1,5 +1,3 @@
-//matchig table 
-
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
@@ -7,46 +5,53 @@ module.exports = (sequelize) => {
         match_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true, // AUTO_INCREMENT 설정
+            autoIncrement: true,
             allowNull: false
         },
         requester_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'user',  // 외래키로 user 테이블을 참조
+                model: 'user',
                 key: 'user_id'
             },
-            onDelete: 'CASCADE', // 유저 삭제 시 매칭 정보도 삭제
+            onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         },
         responder_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'user',  // 외래키로 user 테이블을 참조
+                model: 'user',
                 key: 'user_id'
             },
-            onDelete: 'CASCADE', // 유저 삭제 시 매칭 정보도 삭제
+            onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         },
         message: {
             type: DataTypes.STRING(500),
-            allowNull: true // 메세지는 NULL 허용
+            allowNull: true
         },
         status: {
             type: DataTypes.ENUM("requested", "accepted", "rejected"),
-            allowNull: false // 상태는 NULL 불가
+            allowNull: false
         },
         created_at: {
             type: DataTypes.DATE,
             allowNull: false,
-            defaultValue: DataTypes.NOW // 기본값: CURRENT_TIMESTAMP
+            defaultValue: DataTypes.NOW
         }
     }, 
     {
-        tableName: "matching", // 테이블명 설정
-        timestamps: false // createdAt, updatedAt 자동 생성 방지
+        tableName: "matching",
+        timestamps: false
     });
+
+    Matching.associate = (models) => {
+        Matching.belongsTo(models.User, { foreignKey: 'requester_id', as: 'requester' }); // 요청자
+        Matching.belongsTo(models.User, { foreignKey: 'responder_id', as: 'responder' }); // 응답자
+    };
+
     return Matching;
-}
+};
+
