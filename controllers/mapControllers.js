@@ -1,5 +1,3 @@
-//지도 관련 기능.. 사용자 위치 표시, 마커 클릭 시 프로필 보이고 채팅 요청..
-
 const { UserLocation, User, RunningData, Matching, Sequelize } = require('../models');
 const { Op } = require("sequelize"); // Op 객체 불러오기
 
@@ -18,7 +16,7 @@ exports.getMatchedUsersLocation = async (req, res) => {
                 {
                     model: User,
                     as: 'requester',
-                    attributes: ['nickname', 'intro','profile_picture'],
+                    attributes: ['nickname', 'intro', 'profile_picture'],
                     include: [
                         {
                             model: UserLocation,
@@ -30,14 +28,15 @@ exports.getMatchedUsersLocation = async (req, res) => {
                                 [Sequelize.fn('COUNT', Sequelize.col('run_id')), 'run_count'],
                                 [Sequelize.fn('SUM', Sequelize.col('distance_km')), 'total_distance'],
                                 [Sequelize.fn('AVG', Sequelize.col('pace')), 'avg_pace']
-                            ]
+                            ],
+                            group: ['requester.user_id'] // 그룹화 추가
                         }
                     ]
                 },
                 {
                     model: User,
                     as: 'responder',
-                    attributes: ['nickname', 'intro','profile_picture'],
+                    attributes: ['nickname', 'intro', 'profile_picture'],
                     include: [
                         {
                             model: UserLocation,
@@ -49,7 +48,8 @@ exports.getMatchedUsersLocation = async (req, res) => {
                                 [Sequelize.fn('COUNT', Sequelize.col('run_id')), 'run_count'],
                                 [Sequelize.fn('SUM', Sequelize.col('distance_km')), 'total_distance'],
                                 [Sequelize.fn('AVG', Sequelize.col('pace')), 'avg_pace']
-                            ]
+                            ],
+                            group: ['responder.user_id'] // 그룹화 추가
                         }
                     ]
                 }
@@ -57,9 +57,9 @@ exports.getMatchedUsersLocation = async (req, res) => {
         });
 
         // 매칭된 사용자의 위치와 정보를 응답
-        res.status(200).json(matchedUsers);
+        res.status(200).json({ matchedUsers }); // 응답 구조화
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Failed to fetch matched users location.' });
+        console.error('Error fetching matched users location:', err); // 구체적인 에러 로그
+        res.status(500).json({ error: 'Failed to fetch matched users location.', details: err.message }); // 에러 메시지 추가
     }
 };
