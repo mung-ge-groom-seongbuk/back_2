@@ -1,6 +1,6 @@
 const { User, Matching, RunningData, UserLocation, Sequelize } = require('../models');
 const { Op } = require('sequelize');
-const { sendFirebaseNotification } = require('../config/firebase'); // Firebase 푸시 알림 함수
+const { sendFirebaseNotification } = require('../config/firebase');
 
 // 반경 3km 이내 사용자 목록
 exports.getNearbyUsers = async (req, res) => {
@@ -34,7 +34,7 @@ exports.getNearbyUsers = async (req, res) => {
                     Sequelize.fn('point', longitude, latitude),
                     Sequelize.fn('point', Sequelize.col('UserLocation.longitude'), Sequelize.col('UserLocation.latitude'))
                 ),
-                { [Op.lte]: 3000 }
+                { [Op.lte]: 3000 } // 3km 이내
             ),
             group: ['User.user_id', 'User.nickname', 'User.intro', 'UserLocation.id', 'UserLocation.latitude', 'UserLocation.longitude']
         });
@@ -89,42 +89,6 @@ exports.sendMatchRequest = async (req, res) => {
     }
 };
 
-// 받은 매칭 요청 목록 가져오기
-exports.getMatchRequests = async (req, res) => {
-    const user = req.user; // JWT로 인증된 사용자 정보 가져오기
-
-    try {
-        const matchRequests = await Matching.findAll({
-            where: { responder_id: user.user_id, status: 'requested' },
-            include: [
-                {
-                    model: User,
-                    as: 'requester',
-                    attributes: ['nickname', 'intro']
-                }
-            ]
-        });
-
-        res.status(200).json(matchRequests);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: '매칭 요청 목록을 가져오는 데 실패했습니다.' });
-    }
-};
-
-// 매칭 요청 수락
-exports.acceptMatch = async (req, res) => {
-    try {
-        const { match_id } = req.body;
-
-        await Matching.update({ status: 'accepted' }, { where: { match_id } });
-
-        res.status(200).json({ message: '매칭 요청이 수락되었습니다.' });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: '매칭 요청 수락에 실패했습니다.' });
-    }
-};
 
 
 
