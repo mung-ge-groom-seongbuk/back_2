@@ -22,6 +22,7 @@ exports.authenticate = async (req, res) => {
 
             // 생성된 토큰을 DB에 저장
             await user.update({ token });
+
             // 세션에 user_id 저장
             req.session.user_id = user.user_id; // 세션에 user_id 저장
 
