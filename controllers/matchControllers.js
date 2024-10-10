@@ -48,10 +48,10 @@ exports.getNearbyUsers = async (req, res) => {
 
 // 매칭 요청 보내기
 exports.sendMatchRequest = async (req, res) => {
-    const user = req.session.user; // 세션에서 사용자 정보를 가져옴
+    const user = req.user; // JWT로 인증된 사용자 정보 가져오기
 
     if (!user) {
-        return res.status(401).json({ error: '로그인이 필요합니다.' }); // 로그인 여부 확인
+        return res.status(401).json({ error: '로그인이 필요합니다.' });
     }
 
     try {
@@ -64,22 +64,22 @@ exports.sendMatchRequest = async (req, res) => {
 
         // 매칭 요청 생성
         const newMatch = await Matching.create({
-            requester_id: user.user_id, // 요청자의 ID를 세션에서 가져옴
+            requester_id: user.user_id,
             responder_id,
             message,
-            status: 'requested' // 상태 값을 'requested'로 설정
+            status: 'requested'
         });
 
         // 상대방에게 푸시 알림 보내기
         const responder = await User.findByPk(responder_id);
-        if (responder && responder.firebase_token) { // 상대방의 Firebase 토큰이 존재할 경우
+        if (responder && responder.firebase_token) {
             const payload = {
                 notification: {
                     title: '새로운 매칭 요청',
                     body: `${user.nickname} 님이 매칭을 요청했습니다.`,
                 }
             };
-            await sendFirebaseNotification(responder.firebase_token, payload); // 알림 전송
+            await sendFirebaseNotification(responder.firebase_token, payload);
         }
 
         res.status(200).json({ message: '매칭 요청이 전송되었습니다.', match: newMatch });
@@ -91,9 +91,11 @@ exports.sendMatchRequest = async (req, res) => {
 
 // 받은 매칭 요청 목록 가져오기
 exports.getMatchRequests = async (req, res) => {
+    const user = req.user; // JWT로 인증된 사용자 정보 가져오기
+
     try {
         const matchRequests = await Matching.findAll({
-            where: { responder_id: req.user.user_id, status: 'requested' },
+            where: { responder_id: user.user_id, status: 'requested' },
             include: [
                 {
                     model: User,
@@ -123,6 +125,7 @@ exports.acceptMatch = async (req, res) => {
         res.status(500).json({ error: '매칭 요청 수락에 실패했습니다.' });
     }
 };
+
 
 
 

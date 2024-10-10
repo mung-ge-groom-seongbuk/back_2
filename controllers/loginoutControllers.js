@@ -16,7 +16,7 @@ exports.authenticate = async (req, res) => {
             // JWT 토큰 생성
             const token = jwt.sign(
                 { user_id: user.user_id, email: user.email },
-                config.development.sessionSecret, // 수정된 부분
+                config.development.sessionSecret, // 세션 비밀키
                 { expiresIn: '1h' }
             );
 
@@ -26,11 +26,11 @@ exports.authenticate = async (req, res) => {
             // 응답으로 토큰 전송
             return res.status(200).json({ message: "로그인 성공!", token, redirectUrl: '/dashboard' });
         } else {
-            return res.status(401).json({ message: "이메일 또는 비밀번호가 올바르지 않습니다." }); // 로그인 실패 응답
+            return res.status(401).json({ message: "이메일 또는 비밀번호가 올바르지 않습니다." });
         }
     } catch (error) {
         console.error('로그인 중 오류 발생:', error);
-        return res.status(500).send('서버 내부 오류'); // 에러 발생 시 적절한 응답
+        return res.status(500).send('서버 내부 오류');
     }
 };
 
@@ -53,6 +53,7 @@ exports.redirectView = (req, res) => {
         res.status(500).send('리다이렉트 경로가 설정되지 않았습니다.');
     }
 };
+
 
 
 
