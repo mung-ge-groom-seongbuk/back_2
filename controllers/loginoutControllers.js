@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken'); // JWT 모듈 불러오기
 const config = require('../config/config'); // config 가져오기
 const { User } = require('../models'); // User 모델 불러오기
+const UserLocation = require('../models/userLocation'); // UserLocation 모델 가져오기
 
 // 로그인
 exports.authenticate = async (req, res) => {
