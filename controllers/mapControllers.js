@@ -29,7 +29,7 @@ exports.getMatchedUsersLocation = async (req, res) => {
                                 [Sequelize.fn('SUM', Sequelize.col('distance_km')), 'total_distance'],
                                 [Sequelize.fn('AVG', Sequelize.col('pace')), 'avg_pace']
                             ],
-                            group: ['requester.user_id'] // 그룹화 추가
+                            group: ['requester.user_id']
                         }
                     ]
                 },
@@ -49,18 +49,27 @@ exports.getMatchedUsersLocation = async (req, res) => {
                                 [Sequelize.fn('SUM', Sequelize.col('distance_km')), 'total_distance'],
                                 [Sequelize.fn('AVG', Sequelize.col('pace')), 'avg_pace']
                             ],
-                            group: ['responder.user_id'] // 그룹화 추가
+                            group: ['responder.user_id']
                         }
                     ]
                 }
             ]
         });
 
+        // matchedUsers 내용 확인
+        console.log('Matched Users:', matchedUsers);
+
+        if (!matchedUsers || matchedUsers.length === 0) {
+            console.log('No matched users found for user_id:', req.user.user_id);
+            return res.status(404).json({ message: 'No matched users found.' });
+        }
+
         // 매칭된 사용자의 위치와 정보를 응답
-        res.status(200).json({ matchedUsers }); // 응답 구조화
+        res.status(200).json({ matchedUsers });
     } catch (err) {
-        console.error('Error fetching matched users location:', err); // 구체적인 에러 로그
-        res.status(500).json({ error: 'Failed to fetch matched users location.', details: err.message }); // 에러 메시지 추가
+        console.error('Error fetching matched users location:', err);
+        res.status(500).json({ error: 'Failed to fetch matched users location.', details: err.message });
     }
 };
+
 
